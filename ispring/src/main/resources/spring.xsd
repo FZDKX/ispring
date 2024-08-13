@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!--定义简单类型：没有子元素和属性，就是简单类型-->
+    <xs:element name="test" type="xs:string"/>
+
+    <!--自定义简单类型-->
+    <xs:simpleType name="scopeEnum">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="singleton"/>
+            <xs:enumeration value="prototype"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- 定义属性 -->
+    <!--bean标签的属性-->
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="class" type="xs:string"/>
+    <xs:attribute name="scope" type="scopeEnum" default="singleton"/>
+    <xs:attribute name="lazy-init" type="xs:boolean" default="false"/>
+    <xs:attribute name="init-method" type="xs:string"/>
+    <xs:attribute name="destroy-method" type="xs:string"/>
+    <!--property标签的属性-->
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="ref" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+
+    <!-- 定义复杂元素-->
+    <!--property-->
+    <xs:element name="property">
+        <xs:complexType>
+            <xs:attribute ref="name" use="required"/>
+            <xs:attribute ref="ref"/>
+            <xs:attribute ref="value"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!--constructor-arg-->
+    <xs:element name="constructor-arg">
+        <xs:complexType>
+            <xs:attribute name="index" type="xs:integer" use="required"/>
+            <xs:attribute ref="ref"/>
+            <xs:attribute name="value" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+
+
+    <!--bean-->
+    <xs:element name="bean">
+        <xs:complexType>
+            <!--内部元素 可以有0~n个property-->
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="property"/>
+                <xs:element ref="constructor-arg"/>
+            </xs:choice>
+
+            <!--属性-->
+            <xs:attribute ref="id"/>
+            <xs:attribute ref="class"/>
+            <xs:attribute ref="scope"/>
+            <xs:attribute ref="lazy-init"/>
+            <xs:attribute ref="init-method"/>
+            <xs:attribute ref="destroy-method"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!--beans-->
+    <xs:element name="beans">
+        <xs:complexType>
+            <!--可以有0~n个bean-->
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                <xs:element ref="bean"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
