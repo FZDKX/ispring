@@ -66,6 +66,11 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
         return singletonObject;
     }
 
+    @Override
+    public void registerSingleton(String beanName, Object singletonObject) {
+        this.singletonObjects.put(beanName,singletonObject);
+    }
+
     // 获取一个bean，带有 ObjectFactory 的获取
     public Object getSingleton(String beanName, ObjectFactory<?> singletonFactory) {
         // 从一级缓存中获取

@@ -8,6 +8,7 @@ import com.fzdkx.spring.beans.factory.support.AbstractBeanDefinitionReader;
 import com.fzdkx.spring.beans.factory.support.BeanDefinitionRegistry;
 import com.fzdkx.spring.core.io.Resource;
 import com.fzdkx.spring.core.io.ResourceLoader;
+import com.fzdkx.spring.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
@@ -173,17 +174,14 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
     private static BeanDefinition attributeHandle(Element bean) {
         // 处理属性
         BeanDefinition beanDefinition = new BeanDefinition();
-        // id
-        Attribute id = bean.attribute("id");
-        if (id != null) {
-            beanDefinition.setName(id.getValue());
-        }
+
         // class
         Attribute className = bean.attribute("class");
+        Class<?> clazz;
         if (className != null) {
             beanDefinition.setBeanClassName(className.getValue());
             try {
-                Class<?> clazz = Class.forName(className.getValue());
+                clazz = Class.forName(className.getValue());
                 beanDefinition.setBeanClass(clazz);
                 // 判断是否是FactoryBean
                 if (FactoryBean.class.isAssignableFrom(clazz)) {
@@ -192,7 +190,19 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
+        }else {
+            throw new RuntimeException("bean定义错误");
         }
+
+        // id
+        Attribute id = bean.attribute("id");
+        if (id != null) {
+            beanDefinition.setName(id.getValue());
+        }else {
+            // id == null ，赋默认值，获取SimpleName，首字母变小写
+            StringUtils.lowerFirst(clazz.getSimpleName());
+        }
+
         // scope
         Attribute scope = bean.attribute("scope");
         if (scope != null) {

@@ -2,21 +2,23 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:noNamespaceSchemaLocation="spring.xsd">
 
-    <bean id="cat" class="com.fzdkx.spring.test.Cat">
-        <property name="person" ref="person"/>
-        <property name="id" value="22"/>
-    </bean>
+<!--    <bean id="cat" class="com.fzdkx.spring.test.Cat">-->
+<!--        <property name="person" ref="person"/>-->
+<!--        <property name="id" value="22"/>-->
+<!--    </bean>-->
 
-    <bean id="person" class="com.fzdkx.spring.test.Person" init-method="sayHello" destroy-method="sayBye">
-       <property name="cat" ref="cat"/>
-       <property name="id" value="62"/>
-    </bean>
+<!--    <bean id="person" class="com.fzdkx.spring.test.Person" init-method="sayHello" destroy-method="sayBye">-->
+<!--       <property name="cat" ref="cat"/>-->
+<!--       <property name="id" value="62"/>-->
+<!--    </bean>-->
 
-    <bean id="apple" class="com.fzdkx.spring.test.Apple" scope="prototype"/>
+<!--    <bean id="apple" class="com.fzdkx.spring.test.Apple" scope="prototype"/>-->
 
-    <bean id="myBeanPostProcess" class="com.fzdkx.spring.test.MyBeanPostProcess"/>
+<!--    <bean id="myBeanPostProcess" class="com.fzdkx.spring.test.MyBeanPostProcess"/>-->
 
-<!--    <bean id="myBean" class="com.fzdkx.spring.test.MyBean" init-method="sayHello" destroy-method="sayBye"/>-->
     <bean id="myBean" class="com.fzdkx.spring.test.MyFactoryBean"/>
 
+    <bean id="refresh" class="com.fzdkx.spring.test.ContextRefreshedEventListener"/>
+    <bean id="close" class="com.fzdkx.spring.test.ContextClosedEventListener"/>
+    <bean id="custom" class="com.fzdkx.spring.test.CustomEventListener"/>
 </beans>
