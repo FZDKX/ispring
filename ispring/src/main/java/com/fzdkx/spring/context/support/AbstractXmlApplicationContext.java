@@ -11,6 +11,7 @@ import com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader;
 public abstract class AbstractXmlApplicationContext extends AbstractRefreshableApplicationContext{
     @Override
     protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) {
+        // 读取XML配置文件
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory, this);
         String[] configLocations = getConfigLocations();
         if (configLocations != null){

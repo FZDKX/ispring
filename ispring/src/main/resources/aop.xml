@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="spring.xsd">
+
+    <!-- 普通bean -->
+    <bean id="userService" class="com.fzdkx.spring.test.UserServiceImpl"/>
+
+    <!-- bean post process-->
+    <bean class="com.fzdkx.spring.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"/>
+
+    <bean id="myAopTest" class="com.fzdkx.spring.test.MyAopTest"/>
+    <bean id="myAopTest1" class="com.fzdkx.spring.test.MyAopTest1"/>
+
+</beans>

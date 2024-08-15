@@ -86,7 +86,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
     // 进行下放，可能子类会创建处不同的 BeanFactory
     protected abstract void refreshBeanFactory() throws BeansException;
 
-    // 获取BeanFactory，下放，或获取子类真正创建的BenaFactory
+    // 获取BeanFactory，下放，或获取子类真正创建的BeanFactory
     protected abstract ConfigurableListableBeanFactory getBeanFactory();
 
     // 执行所有BeanFactoryPostProcess的方法

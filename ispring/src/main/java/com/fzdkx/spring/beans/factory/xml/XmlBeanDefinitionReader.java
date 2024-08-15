@@ -200,7 +200,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             beanDefinition.setName(id.getValue());
         }else {
             // id == null ，赋默认值，获取SimpleName，首字母变小写
-            StringUtils.lowerFirst(clazz.getSimpleName());
+            beanDefinition.setName(StringUtils.lowerFirst(clazz.getSimpleName()));
         }
 
         // scope

@@ -1,6 +1,5 @@
 package com.fzdkx.spring.beans.factory.config;
 
-import lombok.Data;
 import lombok.Getter;
 
 import java.util.LinkedHashMap;
@@ -20,8 +19,14 @@ public class ConstructorArgument {
         return this.indexedArgumentValues.isEmpty();
     }
 
+    public Map<Integer, ValueHolder> getIndexedArgumentValues() {
+        return indexedArgumentValues;
+    }
 
-    @Data
+    public void setValueHolder(Integer index, ValueHolder valueHolder) {
+        indexedArgumentValues.put(index, valueHolder);
+    }
+
     public static class ValueHolder {
 
         // 参数类型
@@ -34,5 +39,31 @@ public class ConstructorArgument {
          */
         private Object value;
 
+        public ValueHolder() {
+
+        }
+
+        public ValueHolder(Class<?> type, Object value) {
+            this.type = type;
+            this.value = value;
+        }
+
+
+
+        public Class<?> getType() {
+            return type;
+        }
+
+        public void setType(Class<?> type) {
+            this.type = type;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public void setValue(Object value) {
+            this.value = value;
+        }
     }
 }

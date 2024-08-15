@@ -6,11 +6,10 @@ import com.fzdkx.spring.beans.factory.*;
 import com.fzdkx.spring.beans.factory.config.*;
 import com.fzdkx.spring.util.BeanUtils;
 import com.fzdkx.spring.util.StringUtils;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Map;
 
 /**
@@ -18,8 +17,6 @@ import java.util.Map;
  * @create 2024/8/10
  * 可以实例化Bean的抽象Bean工厂
  */
-@EqualsAndHashCode(callSuper = true)
-@Data
 public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFactory implements AutowireCapableBeanFactory {
 
     // 实例化创建策略类
@@ -32,6 +29,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     private Object doCreateBean(String name, BeanDefinition beanDefinition) {
         Object bean;
+        // 在创建bean实例之前，进行解析
+        bean = resolveBeforeInstantiation(name, beanDefinition);
+        if (bean != null) {
+            return bean;
+        }
         // 创建实例
         bean = createBeanInstance(name, beanDefinition);
         // 如果是单例bean，并且正在创建中
@@ -49,9 +51,29 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         return bean;
     }
 
+    protected Object resolveBeforeInstantiation(String name, BeanDefinition beanDefinition) {
+        Object bean = applyBeanPostProcessorsBeforeInstantiation(beanDefinition.getBeanClass(), name);
+        if (null != bean) {
+            bean = applyBeanPostProcessorsAfterInitialization(bean, name);
+        }
+        return bean;
+    }
+
+    private Object applyBeanPostProcessorsBeforeInstantiation(Class<?> beanClass, String name) {
+        // 获取 InstantiationAware BeanPostProcessor
+        for (BeanPostProcessor beanPostProcessor : getBeanPostProcessors()) {
+            if (beanPostProcessor instanceof InstantiationAwareBeanPostProcessor) {
+                // 调用
+                Object result = ((InstantiationAwareBeanPostProcessor) beanPostProcessor).postProcessBeforeInstantiation(beanClass, name);
+                if (null != result) return result;
+            }
+        }
+        return null;
+    }
+
     private void registerDisposableBeanIfNecessary(String name, Object bean, BeanDefinition bd) {
         // 如果这个bean是 非单例，那么不用注册销毁方法
-        if (!bd.isSingleton()){
+        if (!bd.isSingleton()) {
             return;
         }
         // 如果Bean实现了DisposableBean接口 或 自定义了 destroy-method ，那么进行注册
@@ -140,13 +162,16 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Constructor<?>[] constructors = beanClass.getDeclaredConstructors();
         Object[] args = null;
         // 只有一个构造方法，且不是无参构造
-        if (constructors.length == 1 && bd.hasConstructorArgumentValues()) {
-            // 获取这个构造方法，进行创建
-            constructor = constructors[0];
-            // 获取方法参数
-            args = getConstructorArgument(bd, constructor);
-            if (args == null) {
-                throw new BeanInstanceException("没有对应构造函数");
+        if (constructors.length == 1) {
+            Parameter[] parameters = constructors[0].getParameters();
+            if (parameters != null && parameters.length != 0) {
+                // 获取这个构造方法，进行创建
+                constructor = constructors[0];
+                // 获取方法参数
+                args = getConstructorArgument(bd, constructor);
+                if (args == null) {
+                    throw new BeanInstanceException("没有对应构造函数");
+                }
             }
         } else if (bd.hasConstructorArgumentValues()) {  // 有多个构造方法，并且指定了构造方法
             for (Constructor<?> c : constructors) {
@@ -172,10 +197,13 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     protected Object getEarlyBeanReference(String beanName, BeanDefinition bd, Object bean) {
         Object exposedObject = bean;
-        // 是否需要代理
-        boolean flag = false;
-        if (flag) {
-            // 进行代理
+        if (isHasInstantiationAwareBeanPostProcessors()) {
+            for (BeanPostProcessor bpp : getBeanPostProcessors()) {
+                if (bpp instanceof InstantiationAwareBeanPostProcessor) {
+                    InstantiationAwareBeanPostProcessor ibpp = (InstantiationAwareBeanPostProcessor) bpp;
+                    exposedObject = ibpp.getEarlyBeanReference(exposedObject, beanName, bd);
+                }
+            }
         }
         return exposedObject;
     }
@@ -183,6 +211,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     private Object[] getConstructorArgument(BeanDefinition bd, Constructor<?> constructor) {
         Class<?>[] types = constructor.getParameterTypes();
         ConstructorArgument argument = bd.getConstructorArgument();
+        if (argument == null) {
+            throw new BeansException("找不到指定构造函数");
+        }
         Map<Integer, ConstructorArgument.ValueHolder> map = argument.getIndexedArgumentValues();
         if (types.length != map.size()) {
             return null;
@@ -241,4 +272,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         return result;
     }
 
+    public InstantiationStrategy getInstantiationStrategy() {
+        return instantiationStrategy;
+    }
+
+    public void setInstantiationStrategy(InstantiationStrategy instantiationStrategy) {
+        this.instantiationStrategy = instantiationStrategy;
+    }
 }

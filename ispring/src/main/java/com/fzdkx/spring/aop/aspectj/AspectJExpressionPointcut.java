@@ -25,29 +25,20 @@ public class AspectJExpressionPointcut implements ClassFilter, MethodMatcher, Po
         SUPPORTED_PRIMITIVES.add(PointcutPrimitive.EXECUTION);
     }
 
-    // 切人点表达式
     private final PointcutExpression pointcutExpression;
 
-    // 传入知道的切点表达式字符串
     public AspectJExpressionPointcut(String expression) {
-        // PointCut解析器 调用方法：获取支持指定原语的切入点解析器，并使用指定的类加载器进行解析
-        // 得到切点表达式对象
-        PointcutParser pointcutParser
-                = PointcutParser.getPointcutParserSupportingSpecifiedPrimitivesAndUsingSpecifiedClassLoaderForResolution
-                                                                (SUPPORTED_PRIMITIVES, this.getClass().getClassLoader());
-        // 给切人点表达式赋值
-        this.pointcutExpression = pointcutParser.parsePointcutExpression(expression);
+        PointcutParser pointcutParser = PointcutParser.getPointcutParserSupportingSpecifiedPrimitivesAndUsingSpecifiedClassLoaderForResolution(SUPPORTED_PRIMITIVES, this.getClass().getClassLoader());
+        pointcutExpression = pointcutParser.parsePointcutExpression(expression);
     }
 
     @Override
     public boolean matches(Class<?> clazz) {
-        // 判断一个类 是否符合 当前切点表达式
         return pointcutExpression.couldMatchJoinPointsInType(clazz);
     }
 
     @Override
-    public boolean matches(Method method, Class<?> targetClass) {
-        // 当前method 是否 匹配切点表达式
+    public boolean matches(Method method) {
         return pointcutExpression.matchesMethodExecution(method).alwaysMatches();
     }
 

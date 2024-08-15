@@ -1,9 +1,10 @@
 package com.fzdkx.spring.util;
 
-import com.fzdkx.spring.beans.factory.config.SimpleDataType;
 import com.fzdkx.spring.beans.exception.PropertyInjectException;
+import com.fzdkx.spring.beans.factory.config.SimpleDataType;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 
 /**
  * @author 发着呆看星
@@ -34,6 +35,19 @@ public class BeanUtils {
             field.set(bean, value);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new PropertyInjectException("属性注入失败");
+        }
+    }
+
+    public static boolean isEmpty(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (object instanceof String) {
+            return "".equals(object);
+        } else if (object instanceof Collection<?>) {
+            return ((Collection<?>) object).isEmpty();
+        }else {
+            return true;
         }
     }
 }

@@ -1,6 +1,11 @@
 package com.fzdkx.spring.context.support;
 
 import com.fzdkx.spring.beans.exception.BeansException;
+import com.fzdkx.spring.beans.factory.config.BeanDefinition;
+
+import java.lang.annotation.Annotation;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author 发着呆看星
@@ -24,5 +29,15 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
     @Override
     protected String[] getConfigLocations() {
         return this.locations;
+    }
+
+    @Override
+    public List<String> getBeanNamesOfType(Class<Object> type) {
+        return this.getBeanFactory().getBeanNamesOfType(type);
+    }
+
+    @Override
+    public Set<BeanDefinition> getClassByAnnotation(Class<? extends Annotation> clazz) {
+        return this.getBeanFactory().getClassByAnnotation(clazz);
     }
 }

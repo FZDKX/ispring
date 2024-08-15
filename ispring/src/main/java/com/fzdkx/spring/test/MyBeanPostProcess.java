@@ -1,7 +1,7 @@
 package com.fzdkx.spring.test;
 
-import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
 import com.fzdkx.spring.beans.exception.BeansException;
+import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
 import lombok.extern.slf4j.Slf4j;
 
 /**

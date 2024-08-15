@@ -1,6 +1,11 @@
 package com.fzdkx.spring.beans.factory;
 
 import com.fzdkx.spring.beans.exception.BeansException;
+import com.fzdkx.spring.beans.factory.config.BeanDefinition;
+
+import java.lang.annotation.Annotation;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author 发着呆看星
@@ -28,4 +33,10 @@ public interface BeanFactory {
 
     // 获取Bena的类型
     Class<?> getType(String name) throws BeansException;
+
+    List<String> getBeanNamesOfType(Class<Object> objectClass);
+
+    // 获取容器中，所有被标记某个注解的类
+    Set<BeanDefinition> getClassByAnnotation(Class<? extends Annotation> clazz);
+
 }

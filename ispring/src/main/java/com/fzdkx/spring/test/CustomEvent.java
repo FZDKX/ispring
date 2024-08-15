@@ -1,7 +1,6 @@
 package com.fzdkx.spring.test;
 
 import com.fzdkx.spring.context.event.ApplicationContextEvent;
-import lombok.Data;
 
 /**
  * @author 发着呆看星

@@ -2,6 +2,7 @@ package com.fzdkx.spring.beans.factory.support;
 
 import com.fzdkx.spring.beans.exception.BeanCurrentlyInCreationException;
 import com.fzdkx.spring.beans.exception.BeanInstanceException;
+import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.DisposableBean;
 import com.fzdkx.spring.beans.factory.ObjectFactory;
 import com.fzdkx.spring.beans.factory.config.SingletonBeanRegistry;
@@ -68,7 +69,7 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
 
     @Override
     public void registerSingleton(String beanName, Object singletonObject) {
-        this.singletonObjects.put(beanName,singletonObject);
+        this.singletonObjects.put(beanName, singletonObject);
     }
 
     // 获取一个bean，带有 ObjectFactory 的获取
@@ -84,7 +85,7 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
                 // 移除正在加载的状态
                 afterSingletonCreation(beanName);
                 // 添加
-                addSingleton(beanName, bean);
+                addSingleton(beanName);
             }
             return bean;
         }
@@ -92,11 +93,27 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
     }
 
     // 向一级缓存容器中添加Bean
-    public void addSingleton(String beanName, Object singletonObject) {
+    public void addSingleton(String beanName) {
         synchronized (this.singletonObjects) {
-            this.singletonObjects.put(beanName, singletonObject);
-            this.singletonFactories.remove(beanName);
-            this.earlySingletonObjects.remove(beanName);
+            // 先从三级缓存获取
+            ObjectFactory<?> objectFactory = singletonFactories.get(beanName);
+            Object singletonBean;
+            // 三级缓存没有
+            if (objectFactory == null) {
+                // 从二级缓存中获取
+                singletonBean = this.earlySingletonObjects.get(beanName);
+            }
+            // 三级缓存有
+            else {
+                singletonBean = objectFactory.getObject();
+            }
+            // 如果为null
+            if (singletonBean == null) {
+                throw new BeansException("bean 创建错误");
+            }
+            singletonObjects.put(beanName, singletonBean);
+            earlySingletonObjects.remove(beanName);
+            singletonFactories.remove(beanName);
         }
     }
 

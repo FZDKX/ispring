@@ -9,12 +9,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserServiceImpl implements UserService {
     @Override
-    public void queryUserInfo() {
-        log.debug("正在查询用户信息......");
+    public String queryUserInfo() {
+        log.debug("目标方法调用：正在查询用户信息......");
+        return "zs";
     }
 
     @Override
     public void register(String userName) {
-        log.debug("正在注册用户信息：{}", userName);
+        log.debug("目标方法调用：正在注册用户信息：{}", userName);
     }
 }

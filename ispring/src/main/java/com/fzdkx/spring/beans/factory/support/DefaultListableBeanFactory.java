@@ -1,22 +1,19 @@
 package com.fzdkx.spring.beans.factory.support;
 
-import com.fzdkx.spring.beans.factory.ConfigurableListableBeanFactory;
-import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 import com.fzdkx.spring.beans.exception.BeanDefinitionStoreException;
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.exception.NoSuchBeanDefinitionException;
+import com.fzdkx.spring.beans.factory.ConfigurableListableBeanFactory;
+import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 import com.fzdkx.spring.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.annotation.Annotation;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author 发着呆看星
  * @create 2024/8/10
- *
  */
 public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFactory implements BeanDefinitionRegistry, ConfigurableListableBeanFactory {
 
@@ -32,7 +29,11 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     // 单例 class -> names
     private final Map<Class<?>, List<String>> singletonBeanNamesByType = new ConcurrentHashMap<>(64);
 
+    // 单例beanDefinition
+    private final Map<String, BeanDefinition> singletonBeanDefinitionMap = new ConcurrentHashMap<>(256);
+
     @Override
+
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) throws BeanDefinitionStoreException {
         if (beanDefinition == null || StringUtils.isEmpty(beanName)) {
             return;
@@ -46,6 +47,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
             nameList = singletonBeanNamesByType.getOrDefault(beanDefinition.getBeanClass(), new ArrayList<>());
             nameList.add(beanName);
             singletonBeanNamesByType.putIfAbsent(beanDefinition.getBeanClass(), nameList);
+            singletonBeanDefinitionMap.put(beanName, beanDefinition);
         }
         beanDefinitionNames.add(beanName);
         beanDefinitionMap.put(beanName, beanDefinition);
@@ -57,14 +59,15 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
         if (beanDefinition == null) {
             return;
         }
-        beanDefinitionNames.remove(beanName);
-        List<String> list = allBeanNamesByType.get(beanName);
+        List<String> list = allBeanNamesByType.get(beanDefinition.getBeanClass());
         list.remove(beanName);
         if (beanDefinition.isSingleton()) {
-            list = singletonBeanNamesByType.get(beanName);
+            list = singletonBeanNamesByType.get(beanDefinition.getBeanClass());
             list.remove(beanName);
         }
         beanDefinitionMap.remove(beanName);
+        beanDefinitionNames.remove(beanName);
+        singletonBeanDefinitionMap.remove(beanName);
     }
 
     @Override
@@ -97,14 +100,14 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     @Override
     public <T> Map<String, T> getBeansOfType(Class<T> type) throws BeansException {
         HashMap<String, T> map = new HashMap<>();
-        beanDefinitionMap.forEach((beanName, deanDefinition) -> {
-            Class<?> clazz = deanDefinition.getBeanClass();
+        for (Map.Entry<String, BeanDefinition> entry : singletonBeanDefinitionMap.entrySet()) {
+            Class<?> clazz = entry.getValue().getBeanClass();
             // 判断 type 是否是 beanClass 的 同类 或 父类 或 接口
             if (type.isAssignableFrom(clazz)) {
                 // 如果没有，会调用getBean方法创建
-                map.put(beanName, (T) getBean(beanName));
+                map.put(entry.getKey(), (T) getBean(entry.getKey()));
             }
-        });
+        }
         return map;
     }
 
@@ -124,4 +127,30 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
         return beanDefinitionNames.size();
     }
 
+    @Override
+    public List<String> getBeanNamesOfType(Class<Object> type) {
+        ArrayList<String> list = new ArrayList<>();
+        singletonBeanDefinitionMap.forEach((beanName, deanDefinition) -> {
+            Class<?> clazz = deanDefinition.getBeanClass();
+            // 判断 type 是否是 beanClass 的 同类 或 父类 或 接口
+            if (type.isAssignableFrom(clazz)) {
+                // 如果没有，会调用getBean方法创建
+                list.add(beanName);
+            }
+        });
+        return list;
+    }
+
+    @Override
+    public Set<BeanDefinition> getClassByAnnotation(Class<? extends Annotation> clazz) {
+        Set<BeanDefinition> set = new HashSet<>();
+        // 获取所有的单例bean
+        for (Map.Entry<String, BeanDefinition> entry : singletonBeanDefinitionMap.entrySet()) {
+            Class<?> beanClass = entry.getValue().getBeanClass();
+            if (beanClass.isAnnotationPresent(clazz)) {
+                set.add(entry.getValue());
+            }
+        }
+        return set;
+    }
 }

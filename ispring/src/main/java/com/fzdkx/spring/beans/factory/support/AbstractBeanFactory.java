@@ -7,6 +7,7 @@ import com.fzdkx.spring.beans.factory.FactoryBean;
 import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
 import com.fzdkx.spring.beans.factory.config.ConfigurableBeanFactory;
+import com.fzdkx.spring.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import com.fzdkx.spring.util.BeanFactoryUtil;
 import com.fzdkx.spring.util.ClassUtils;
 
@@ -24,6 +25,8 @@ import java.util.List;
 public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport implements ConfigurableBeanFactory {
 
     private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
+
+    private volatile boolean hasInstantiationAwareBeanPostProcessors;
 
     private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
 
@@ -70,7 +73,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
             else if (beanDefinition.isPrototype()) {
                 // 创建一个Bean，完成依赖注入与初始化
                 bean = createBean(beanName, beanDefinition);
-            }else {
+            } else {
                 throw new BeansException("bean 类型错误");
             }
         }
@@ -93,18 +96,18 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 
     /**
      * @param beanInstance 容器中获取的对象
-     * @param name 原本的 name
-     * @param beanName 去掉&之后的 name
-     * @param bd Bean定义信息
-     * <p>
-     * 当容器初始化时：FactoryBean 创建时会加上 & , 这时会对FactoryBean 打上标记
-     * 当我们需要FactoryBean创建的bean时：原名称没有 & ，我们从容器中获取bean
-     *     |-- 如果bean 不是FactoryBean：直接返回
-     *     |-- 如果是 FactoryBean
-     *           |-- 如果有 BeanDefinition，表示这个bean不是从缓存中获取的，再次打上标签，返回
-     *           |-- 如果没有 BeanDefinition，表示这个bean是从缓存中获取的
-     *              |-- 尝试从 FactoryBean创建的Bean的缓存中 获取Bean
-     *              |-- 如果获取不到，带哦有FactoryBean的getObject()方法获取
+     * @param name         原本的 name
+     * @param beanName     去掉&之后的 name
+     * @param bd           Bean定义信息
+     *                     <p>
+     *                     当容器初始化时：FactoryBean 创建时会加上 & , 这时会对FactoryBean 打上标记
+     *                     当我们需要FactoryBean创建的bean时：原名称没有 & ，我们从容器中获取bean
+     *                     |-- 如果bean 不是FactoryBean：直接返回
+     *                     |-- 如果是 FactoryBean
+     *                     |-- 如果有 BeanDefinition，表示这个bean不是从缓存中获取的，再次打上标签，返回
+     *                     |-- 如果没有 BeanDefinition，表示这个bean是从缓存中获取的
+     *                     |-- 尝试从 FactoryBean创建的Bean的缓存中 获取Bean
+     *                     |-- 如果获取不到，带哦有FactoryBean的getObject()方法获取
      */
     private Object getObjectForBeanInstance(Object beanInstance, String name, String beanName, BeanDefinition bd) {
         // 如果以&开头：如果是FactoryBean，设置isFactoryBean == true，返回 FactoryBean实例
@@ -182,6 +185,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         if (beanPostProcessor != null) {
             this.beanPostProcessors.remove(beanPostProcessor);
             this.beanPostProcessors.add(beanPostProcessor);
+            if (beanPostProcessor instanceof InstantiationAwareBeanPostProcessor) {
+                this.hasInstantiationAwareBeanPostProcessors = true;
+            }
         }
     }
 
@@ -194,4 +200,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
     }
 
     protected abstract boolean containsBeanDefinition(String beanName);
+
+    public boolean isHasInstantiationAwareBeanPostProcessors() {
+        return this.hasInstantiationAwareBeanPostProcessors;
+    }
+
 }

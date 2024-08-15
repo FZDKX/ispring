@@ -34,7 +34,8 @@ public class SimpleDataType {
             if (value.length() == 1) {
                 return value.charAt(0);
             }
-            throw new BeanInstanceException("转换异常");
+        }else if (clazz == String.class) {
+            return value;
         }
         throw new BeanInstanceException("转换异常");
     }

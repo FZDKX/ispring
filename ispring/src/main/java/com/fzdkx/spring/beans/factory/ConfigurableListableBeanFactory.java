@@ -1,9 +1,9 @@
 package com.fzdkx.spring.beans.factory;
 
+import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.config.AutowireCapableBeanFactory;
 import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 import com.fzdkx.spring.beans.factory.config.ConfigurableBeanFactory;
-import com.fzdkx.spring.beans.exception.BeansException;
 
 /**
  * @author 发着呆看星

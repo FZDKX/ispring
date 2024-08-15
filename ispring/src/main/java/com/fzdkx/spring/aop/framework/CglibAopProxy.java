@@ -43,13 +43,7 @@ public class CglibAopProxy implements AopProxy {
         @Override
         public Object intercept(Object o, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
             Object target = advised.getTargetSource().getTarget();
-            // 如果方法匹配切点表达式，那么就进行增强
-            if (advised.getMethodMatcher().matches(method, advised.getTargetSource().getTarget().getClass())) {
-                // 调用拦截器的 invoke 方法
-                return advised.getMethodInterceptor().invoke(new ReflectiveMethodInvocation(target, method, args));
-            }
-            // 不匹配不进行增强
-            return methodProxy.invoke(target, args);
+            return advised.getMethodInterceptor().invoke(new ReflectiveMethodInvocation(target, method, args));
         }
     }
 

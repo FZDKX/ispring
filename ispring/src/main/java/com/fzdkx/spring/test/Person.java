@@ -1,5 +1,6 @@
 package com.fzdkx.spring.test;
 
+import com.fzdkx.spring.core.Order;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -7,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
  * @create 2024/8/10
  */
 @Slf4j
+@Order(1)
 public class Person {
     private Integer id;
     private Cat cat;

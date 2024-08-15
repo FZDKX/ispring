@@ -15,7 +15,7 @@ public class Main {
 
     // 生命周期
     public static void t1(){
-        ClassPathXmlApplicationContext app = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        ClassPathXmlApplicationContext app = new ClassPathXmlApplicationContext("classpath:aop.xml");
         app.registerShutdownHook();
         log.debug("==============");
         log.debug(String.valueOf(app.getBean("myBean")));
@@ -23,7 +23,7 @@ public class Main {
 
     // 事件发布
     public static void t2(){
-        ClassPathXmlApplicationContext app = new ClassPathXmlApplicationContext("classpath:spring.xml");
+        ClassPathXmlApplicationContext app = new ClassPathXmlApplicationContext("classpath:aop.xml");
         // 发布自定义事件
         app.publishEvent(new CustomEvent(app,20021116L,"剑来"));
         app.registerShutdownHook();

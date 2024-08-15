@@ -1,7 +1,7 @@
 package com.fzdkx.spring.beans.factory.config;
 
-import com.fzdkx.spring.beans.factory.BeanFactory;
 import com.fzdkx.spring.beans.exception.BeansException;
+import com.fzdkx.spring.beans.factory.BeanFactory;
 
 
 /**

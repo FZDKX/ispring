@@ -5,7 +5,7 @@ package com.fzdkx.spring.test;
  * @create 2024/8/13
  */
 public interface UserService {
-    void queryUserInfo();
+    String queryUserInfo();
 
     void register(String userName);
 }

@@ -11,7 +11,7 @@ public class StringUtils {
 
     public static String lowerFirst(String str) {
         char firstChar = str.charAt(0);
-        if (Character.isUpperCase(firstChar)) {
+        if (Character.isLowerCase(firstChar)) {
             return str;
         }
         return Character.toLowerCase(firstChar) + str.substring(1);

@@ -1,13 +1,17 @@
 import com.fzdkx.spring.aop.AdvisedSupport;
 import com.fzdkx.spring.aop.TargetSource;
+import com.fzdkx.spring.aop.annotation.Aspect;
 import com.fzdkx.spring.aop.aspectj.AspectJExpressionPointcut;
 import com.fzdkx.spring.aop.framework.CglibAopProxy;
 import com.fzdkx.spring.aop.framework.JdkDynamicAopProxy;
 import com.fzdkx.spring.beans.factory.FactoryBean;
+import com.fzdkx.spring.context.support.ClassPathXmlApplicationContext;
+import com.fzdkx.spring.core.Order;
 import com.fzdkx.spring.test.*;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 
 /**
@@ -35,31 +39,23 @@ public class Test01 {
         Method method = clazz.getDeclaredMethod("queryUserInfo");
 
         System.out.println(pointcut.matches(clazz));
-        System.out.println(pointcut.matches(method, clazz));
+        System.out.println(pointcut.matches(method));
 
         // true、true
     }
 
     @Test
-    public void test_aop1() {
-        // 目标对象
-        UserService userService = new UserServiceImpl();
+    public void t2() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:aop.xml");
+        UserService userService = applicationContext.getBean("userService", UserService.class);
+        log.debug(userService.queryUserInfo());
+        log.debug("===========================");
+        userService.register("zs");
+    }
 
-        // 组装代理信息
-        AdvisedSupport advisedSupport = new AdvisedSupport();
-        advisedSupport.setTargetSource(new TargetSource(userService));
-        advisedSupport.setMethodInterceptor(new UserServiceInterceptor());
-        advisedSupport.setMethodMatcher(new AspectJExpressionPointcut("execution(* com.fzdkx.spring.test.UserService.*(..))"));
-
-        // 代理对象(JdkDynamicAopProxy)
-        UserService proxy_jdk = (UserService) new JdkDynamicAopProxy(advisedSupport).getProxy();
-        // 测试调用
-        log.debug("======== jdk =========");
-        proxy_jdk.queryUserInfo();
-        // 代理对象(CglibAopProxy)
-        UserService proxy_cglib = (UserService) new CglibAopProxy(advisedSupport).getProxy();
-        // 测试调用
-        log.debug("======== cglib =========");
-        proxy_cglib.register("陈平安");
+    @Test
+    public void t3() {
+        Class<Person> personClass = Person.class;
+        System.out.println(personClass.getAnnotation(Aspect.class));
     }
 }
