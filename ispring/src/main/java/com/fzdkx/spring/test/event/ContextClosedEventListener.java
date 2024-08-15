@@ -1,4 +1,4 @@
-package com.fzdkx.spring.test;
+package com.fzdkx.spring.test.event;
 
 import com.fzdkx.spring.context.ApplicationListener;
 import com.fzdkx.spring.context.event.ContextClosedEvent;

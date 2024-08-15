@@ -7,7 +7,7 @@ import com.fzdkx.spring.beans.factory.FactoryBean;
 import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
 import com.fzdkx.spring.beans.factory.config.ConfigurableBeanFactory;
-import com.fzdkx.spring.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import com.fzdkx.spring.beans.factory.config.AdvisorAutoProxyCreator;
 import com.fzdkx.spring.util.BeanFactoryUtil;
 import com.fzdkx.spring.util.ClassUtils;
 
@@ -185,7 +185,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         if (beanPostProcessor != null) {
             this.beanPostProcessors.remove(beanPostProcessor);
             this.beanPostProcessors.add(beanPostProcessor);
-            if (beanPostProcessor instanceof InstantiationAwareBeanPostProcessor) {
+            if (beanPostProcessor instanceof AdvisorAutoProxyCreator) {
                 this.hasInstantiationAwareBeanPostProcessors = true;
             }
         }

@@ -1,4 +1,4 @@
-package com.fzdkx.spring.test;
+package com.fzdkx.spring.test.service;
 
 /**
  * @author 发着呆看星

@@ -25,6 +25,14 @@
     <xs:attribute name="value" type="xs:string"/>
 
     <!-- 定义复杂元素-->
+
+    <!-- component-scan -->
+    <xs:element name="component-scan">
+        <xs:complexType>
+            <xs:attribute name="base-package" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
     <!--property-->
     <xs:element name="property">
         <xs:complexType>
@@ -67,9 +75,10 @@
     <!--beans-->
     <xs:element name="beans">
         <xs:complexType>
-            <!--可以有0~n个bean-->
+            <!--可以有0~n个-->
             <xs:choice minOccurs="0" maxOccurs="unbounded">
                 <xs:element ref="bean"/>
+                <xs:element ref="component-scan"/>
             </xs:choice>
         </xs:complexType>
     </xs:element>

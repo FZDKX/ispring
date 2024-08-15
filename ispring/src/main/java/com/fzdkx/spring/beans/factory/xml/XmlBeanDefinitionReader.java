@@ -6,6 +6,7 @@ import com.fzdkx.spring.beans.factory.FactoryBean;
 import com.fzdkx.spring.beans.factory.config.*;
 import com.fzdkx.spring.beans.factory.support.AbstractBeanDefinitionReader;
 import com.fzdkx.spring.beans.factory.support.BeanDefinitionRegistry;
+import com.fzdkx.spring.context.annotation.ClassPathBeanDefinitionScanner;
 import com.fzdkx.spring.core.io.Resource;
 import com.fzdkx.spring.core.io.ResourceLoader;
 import com.fzdkx.spring.util.StringUtils;
@@ -83,10 +84,12 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         // 2. 获取DOM4J树的根节点 beans
         Element root = document.getRootElement();
 
-        // 3. 获取根节点的子节点 bean
+        // 3. 解析包扫描
+        componentScanHandle(root);
+        // 4. 获取根节点的子节点 bean
         List<Element> beanList = root.elements("bean");
 
-        // 4. 对bean的属性和子元素进行解析
+        // 5. 对bean的属性和子元素进行解析
         for (Element bean : beanList) {
             // 对Bean进行操作
             // 1：对属性进行处理
@@ -103,6 +106,26 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             }
             getRegistry().registerBeanDefinition(beanDefinition.getName(), beanDefinition);
         }
+    }
+
+    private void componentScanHandle(Element root) {
+        List<Element> elements = root.elements("component-scan");
+        for (Element element : elements) {
+            // 进行包扫描解析
+            Attribute attribute = element.attribute("base-package");
+            if (attribute == null) {
+                // 出错了
+                throw new RuntimeException("配置文件解析错误");
+            }
+            String basePackage = attribute.getValue();
+            scanPackage(basePackage);
+        }
+    }
+
+    private void scanPackage(String basePackages) {
+        ClassPathBeanDefinitionScanner scanner = new ClassPathBeanDefinitionScanner(getRegistry());
+        String[] packages = basePackages.split(",");
+        scanner.doScan(packages);
     }
 
     private void constructorHandle(List<Element> constructors, BeanDefinition bd, Element root) {
@@ -179,7 +202,6 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         Attribute className = bean.attribute("class");
         Class<?> clazz;
         if (className != null) {
-            beanDefinition.setBeanClassName(className.getValue());
             try {
                 clazz = Class.forName(className.getValue());
                 beanDefinition.setBeanClass(clazz);
@@ -190,7 +212,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
-        }else {
+        } else {
             throw new RuntimeException("bean定义错误");
         }
 
@@ -198,7 +220,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         Attribute id = bean.attribute("id");
         if (id != null) {
             beanDefinition.setName(id.getValue());
-        }else {
+        } else {
             // id == null ，赋默认值，获取SimpleName，首字母变小写
             beanDefinition.setName(StringUtils.lowerFirst(clazz.getSimpleName()));
         }

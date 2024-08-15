@@ -1,6 +1,7 @@
-package com.fzdkx.spring.test;
+package com.fzdkx.spring.test.factyory_bean;
 
 import com.fzdkx.spring.beans.factory.FactoryBean;
+import com.fzdkx.spring.test.live.MyBean;
 import lombok.extern.slf4j.Slf4j;
 
 /**

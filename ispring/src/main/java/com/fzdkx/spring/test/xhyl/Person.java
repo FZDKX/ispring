@@ -1,6 +1,6 @@
-package com.fzdkx.spring.test;
+package com.fzdkx.spring.test.xhyl;
 
-import com.fzdkx.spring.core.Order;
+import com.fzdkx.spring.context.annotation.Order;
 import lombok.extern.slf4j.Slf4j;
 
 /**

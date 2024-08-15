@@ -1,4 +1,4 @@
-package com.fzdkx.spring.test;
+package com.fzdkx.spring.test.xhyl;
 
 import com.fzdkx.spring.beans.factory.DisposableBean;
 import com.fzdkx.spring.beans.factory.InitializingBean;

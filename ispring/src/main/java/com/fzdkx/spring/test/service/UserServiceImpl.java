@@ -1,5 +1,6 @@
-package com.fzdkx.spring.test;
+package com.fzdkx.spring.test.service;
 
+import com.fzdkx.spring.context.annotation.Component;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -7,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
  * @create 2024/8/13
  */
 @Slf4j
+@Component("userService")
 public class UserServiceImpl implements UserService {
     @Override
     public String queryUserInfo() {

@@ -40,6 +40,10 @@ public class BeanDefinition {
     public BeanDefinition() {
     }
 
+    public BeanDefinition(Class<?> beanClass) {
+        this.beanClass = beanClass;
+    }
+
     public boolean hasConstructorArgumentValues() {
         return constructorArgument != null && !constructorArgument.isEmpty();
     }
@@ -70,11 +74,7 @@ public class BeanDefinition {
     }
 
     public String getBeanClassName() {
-        return beanClassName;
-    }
-
-    public void setBeanClassName(String beanClassName) {
-        this.beanClassName = beanClassName;
+        return beanClass.getName();
     }
 
     public Class<?> getBeanClass() {
@@ -157,4 +157,5 @@ public class BeanDefinition {
     public void setFactoryBean(boolean factoryBean) {
         isFactoryBean = factoryBean;
     }
+
 }

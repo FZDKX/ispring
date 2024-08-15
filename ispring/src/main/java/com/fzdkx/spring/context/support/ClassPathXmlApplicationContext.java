@@ -40,4 +40,9 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
     public Set<BeanDefinition> getClassByAnnotation(Class<? extends Annotation> clazz) {
         return this.getBeanFactory().getClassByAnnotation(clazz);
     }
+
+    @Override
+    public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) {
+        getBeanFactory().registerBeanDefinition(beanName,beanDefinition);
+    }
 }

@@ -1,5 +1,5 @@
 import com.fzdkx.spring.context.support.ClassPathXmlApplicationContext;
-import com.fzdkx.spring.test.CustomEvent;
+import com.fzdkx.spring.test.event.CustomEvent;
 import lombok.extern.slf4j.Slf4j;
 
 /**

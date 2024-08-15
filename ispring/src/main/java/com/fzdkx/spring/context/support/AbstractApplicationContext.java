@@ -1,7 +1,9 @@
 package com.fzdkx.spring.context.support;
 
+import com.fzdkx.spring.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.ConfigurableListableBeanFactory;
+import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 import com.fzdkx.spring.beans.factory.config.BeanFactoryPostProcessor;
 import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
 import com.fzdkx.spring.context.ApplicationEvent;
@@ -102,6 +104,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
     // 注册 BeanPostProcessors
     private void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory) {
+        // 如果开启AOP
+        BeanDefinition bd = new BeanDefinition(DefaultAdvisorAutoProxyCreator.class);
+        registerBeanDefinition(DefaultAdvisorAutoProxyCreator.DEFAULT_NAME, bd);
+        // 注册
         Map<String, BeanPostProcessor> map = beanFactory.getBeansOfType(BeanPostProcessor.class);
         for (BeanPostProcessor beanPostProcessor : map.values()) {
             // 添加BeanPostProcessors

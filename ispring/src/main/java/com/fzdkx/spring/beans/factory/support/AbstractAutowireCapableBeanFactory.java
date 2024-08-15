@@ -29,11 +29,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
     private Object doCreateBean(String name, BeanDefinition beanDefinition) {
         Object bean;
-        // 在创建bean实例之前，进行解析
-        bean = resolveBeforeInstantiation(name, beanDefinition);
-        if (bean != null) {
-            return bean;
-        }
+        // 记录该Bean正在加载
+        beforeSingletonCreation(name);
         // 创建实例
         bean = createBeanInstance(name, beanDefinition);
         // 如果是单例bean，并且正在创建中
@@ -45,30 +42,15 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         // 属性赋值
         populateBean(name, bean, beanDefinition);
         // 初始化Bean - 相关接口回调
-        bean = initializeBean(name, bean, beanDefinition);
+        initializeBean(name, bean, beanDefinition);
+        // 从容器中获取bean，如果仍是 ObjectFactory ，那么调用getObject方法
+        // 并加入二级缓存，异移除三级缓存
+        bean = getSingleton(name);
         // 注册定义了 销毁方法的Bean，当容器关闭时，调用这些Bean的销毁方法
         registerDisposableBeanIfNecessary(name, bean, beanDefinition);
+        // 移除正在加载的状态
+        afterSingletonCreation(name);
         return bean;
-    }
-
-    protected Object resolveBeforeInstantiation(String name, BeanDefinition beanDefinition) {
-        Object bean = applyBeanPostProcessorsBeforeInstantiation(beanDefinition.getBeanClass(), name);
-        if (null != bean) {
-            bean = applyBeanPostProcessorsAfterInitialization(bean, name);
-        }
-        return bean;
-    }
-
-    private Object applyBeanPostProcessorsBeforeInstantiation(Class<?> beanClass, String name) {
-        // 获取 InstantiationAware BeanPostProcessor
-        for (BeanPostProcessor beanPostProcessor : getBeanPostProcessors()) {
-            if (beanPostProcessor instanceof InstantiationAwareBeanPostProcessor) {
-                // 调用
-                Object result = ((InstantiationAwareBeanPostProcessor) beanPostProcessor).postProcessBeforeInstantiation(beanClass, name);
-                if (null != result) return result;
-            }
-        }
-        return null;
     }
 
     private void registerDisposableBeanIfNecessary(String name, Object bean, BeanDefinition bd) {
@@ -94,7 +76,6 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         } catch (Exception e) {
             throw new RuntimeException("执行Bean的初始化方法失败");
         }
-
         // 4：执行 BeanPostProcess After方法
         wrappedBean = applyBeanPostProcessorsAfterInitialization(bean, name);
         return wrappedBean;
@@ -199,8 +180,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object exposedObject = bean;
         if (isHasInstantiationAwareBeanPostProcessors()) {
             for (BeanPostProcessor bpp : getBeanPostProcessors()) {
-                if (bpp instanceof InstantiationAwareBeanPostProcessor) {
-                    InstantiationAwareBeanPostProcessor ibpp = (InstantiationAwareBeanPostProcessor) bpp;
+                if (bpp instanceof AdvisorAutoProxyCreator) {
+                    AdvisorAutoProxyCreator ibpp = (AdvisorAutoProxyCreator) bpp;
                     exposedObject = ibpp.getEarlyBeanReference(exposedObject, beanName, bd);
                 }
             }

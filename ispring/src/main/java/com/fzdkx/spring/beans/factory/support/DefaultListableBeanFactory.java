@@ -1,5 +1,6 @@
 package com.fzdkx.spring.beans.factory.support;
 
+import com.fzdkx.spring.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import com.fzdkx.spring.beans.exception.BeanDefinitionStoreException;
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.exception.NoSuchBeanDefinitionException;
@@ -33,10 +34,13 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     private final Map<String, BeanDefinition> singletonBeanDefinitionMap = new ConcurrentHashMap<>(256);
 
     @Override
-
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) throws BeanDefinitionStoreException {
         if (beanDefinition == null || StringUtils.isEmpty(beanName)) {
             return;
+        }
+        // 如果已有，不允许存在同名bean
+        if (beanDefinitionMap.containsKey(beanName)) {
+            throw new BeanDefinitionStoreException("定义了同名 bean：" + beanName);
         }
         // 添加
         List<String> nameList = allBeanNamesByType.getOrDefault(beanDefinition.getBeanClass(), new ArrayList<>());
@@ -77,6 +81,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
     @Override
     public void preInstantiateSingletons() throws BeansException {
+        initAop();
+        // 普通bean初始化
         ArrayList<String> names = new ArrayList<>(beanDefinitionNames);
         for (String name : names) {
             BeanDefinition bd = getBeanDefinition(name);
@@ -90,6 +96,11 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
                 }
             }
         }
+    }
+
+    private void initAop() {
+        DefaultAdvisorAutoProxyCreator autoProxyCreator = getBean(DefaultAdvisorAutoProxyCreator.DEFAULT_NAME, DefaultAdvisorAutoProxyCreator.class);
+        autoProxyCreator.initAop();
     }
 
     @Override

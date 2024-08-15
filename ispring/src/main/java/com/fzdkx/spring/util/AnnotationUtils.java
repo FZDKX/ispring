@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 public class AnnotationUtils {
 
     // 获取某个Class类上是否有指定注解
-    public static Annotation getAnnotation(Class clazz, Class annotationType) {
+    public static Annotation getAnnotation(Class<?> clazz, Class<? extends Annotation> annotationType) {
         Annotation temp;
         for (Annotation annotation : clazz.getAnnotations()) {
             if (annotation.annotationType() == annotationType) {

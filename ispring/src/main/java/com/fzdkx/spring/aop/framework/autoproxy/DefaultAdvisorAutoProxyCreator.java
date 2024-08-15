@@ -10,11 +10,10 @@ import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.BeanFactory;
 import com.fzdkx.spring.beans.factory.BeanFactoryAware;
 import com.fzdkx.spring.beans.factory.config.BeanDefinition;
-import com.fzdkx.spring.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import com.fzdkx.spring.beans.factory.config.AdvisorAutoProxyCreator;
 import com.fzdkx.spring.beans.factory.support.DefaultListableBeanFactory;
-import com.fzdkx.spring.core.Order;
+import com.fzdkx.spring.context.annotation.Order;
 import com.fzdkx.spring.util.StringUtils;
-import org.aopalliance.aop.Advice;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,7 +24,9 @@ import java.util.Set;
  * @create 2024/8/13
  * 融入Bean生命周期的核心：自动代理创建者，是一个Bean后置处理器
  */
-public class DefaultAdvisorAutoProxyCreator implements InstantiationAwareBeanPostProcessor, BeanFactoryAware {
+public class DefaultAdvisorAutoProxyCreator implements AdvisorAutoProxyCreator, BeanFactoryAware {
+
+    public static final String DEFAULT_NAME = "defaultAdvisorAutoProxyCreator";
 
     private DefaultListableBeanFactory beanFactory;
 
@@ -38,10 +39,9 @@ public class DefaultAdvisorAutoProxyCreator implements InstantiationAwareBeanPos
     }
 
     @Override
-    public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
+    public void initAop() throws BeansException {
         // 获取所有的Advisor
         loadAdvisors();
-        return null;
     }
 
     // 创建代理对象
@@ -130,5 +130,4 @@ public class DefaultAdvisorAutoProxyCreator implements InstantiationAwareBeanPos
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         return bean;
     }
-
 }

@@ -7,9 +7,12 @@ import com.fzdkx.spring.beans.exception.BeansException;
  * @create 2024/8/13
  * BeanPostProcessor：实例化Bean的AOP代理
  */
-public interface InstantiationAwareBeanPostProcessor extends BeanPostProcessor {
-    Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException;
+public interface AdvisorAutoProxyCreator extends BeanPostProcessor{
 
+    // AOP基础类初始化
+    void initAop() throws BeansException;
+
+    // 返回代理 或 源对象
     Object getEarlyBeanReference(Object bean,String beanName,BeanDefinition bd);
 
 }

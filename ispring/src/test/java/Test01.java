@@ -1,17 +1,13 @@
-import com.fzdkx.spring.aop.AdvisedSupport;
-import com.fzdkx.spring.aop.TargetSource;
 import com.fzdkx.spring.aop.annotation.Aspect;
 import com.fzdkx.spring.aop.aspectj.AspectJExpressionPointcut;
-import com.fzdkx.spring.aop.framework.CglibAopProxy;
-import com.fzdkx.spring.aop.framework.JdkDynamicAopProxy;
 import com.fzdkx.spring.beans.factory.FactoryBean;
 import com.fzdkx.spring.context.support.ClassPathXmlApplicationContext;
-import com.fzdkx.spring.core.Order;
-import com.fzdkx.spring.test.*;
+import com.fzdkx.spring.test.factyory_bean.MyFactoryBean;
+import com.fzdkx.spring.test.service.UserService;
+import com.fzdkx.spring.test.xhyl.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.lang.annotation.Target;
 import java.lang.reflect.Method;
 
 /**
@@ -34,7 +30,7 @@ public class Test01 {
 
     @Test
     public void test_aop() throws NoSuchMethodException {
-        AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut("execution(* com.fzdkx.spring.test.UserService.*(..))");
+        AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut("execution(* com.fzdkx.spring.test.service.UserService.*(..))");
         Class<UserService> clazz = UserService.class;
         Method method = clazz.getDeclaredMethod("queryUserInfo");
 
@@ -53,9 +49,4 @@ public class Test01 {
         userService.register("zs");
     }
 
-    @Test
-    public void t3() {
-        Class<Person> personClass = Person.class;
-        System.out.println(personClass.getAnnotation(Aspect.class));
-    }
 }

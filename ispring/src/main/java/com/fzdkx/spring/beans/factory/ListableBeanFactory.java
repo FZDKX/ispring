@@ -1,6 +1,7 @@
 package com.fzdkx.spring.beans.factory;
 
 import com.fzdkx.spring.beans.exception.BeansException;
+import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 
 import java.util.Map;
 
@@ -21,4 +22,6 @@ public interface ListableBeanFactory extends BeanFactory{
      */
     String[] getBeanDefinitionNames();
 
+    // 注册BeanDefinition
+    void registerBeanDefinition(String beanName, BeanDefinition beanDefinition);
 }

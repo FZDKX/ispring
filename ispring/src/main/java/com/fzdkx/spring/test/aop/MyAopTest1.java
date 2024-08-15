@@ -1,7 +1,9 @@
-package com.fzdkx.spring.test;
+package com.fzdkx.spring.test.aop;
 
 import com.fzdkx.spring.aop.DefaultAspect;
 import com.fzdkx.spring.aop.annotation.Aspect;
+import com.fzdkx.spring.context.annotation.Component;
+import com.fzdkx.spring.context.annotation.Order;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Method;
@@ -11,8 +13,11 @@ import java.lang.reflect.Method;
  * @create 2024/8/15
  */
 @Slf4j()
-@Aspect("execution(* com.fzdkx.spring.test.UserService.*(..))")
-public class MyAopTest extends DefaultAspect {
+@Order(10)
+@Aspect("execution(* com.fzdkx.spring.test.service.UserService.register(..))")
+@Component
+public class MyAopTest1 extends DefaultAspect {
+
     @Override
     public void before(Object target, Method method, Object[] args) {
         log.debug("前置通知，执行方法：{}，方法参数：{}", method.getName(), args);
