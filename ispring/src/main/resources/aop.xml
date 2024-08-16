@@ -3,5 +3,9 @@
        xsi:noNamespaceSchemaLocation="spring.xsd">
 
     <!-- bean post process-->
-    <component-scan base-package="com.fzdkx.spring.test.aop,com.fzdkx.spring.test.service"/>
+    <component-scan base-package="com.fzdkx.spring.test"/>
+
+    <bean class="com.fzdkx.spring.beans.factory.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:jdbc.properties"/>
+    </bean>
 </beans>

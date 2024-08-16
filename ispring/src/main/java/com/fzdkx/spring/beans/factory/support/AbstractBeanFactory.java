@@ -4,12 +4,10 @@ import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.exception.NoSuchBeanDefinitionException;
 import com.fzdkx.spring.beans.factory.BeanFactory;
 import com.fzdkx.spring.beans.factory.FactoryBean;
-import com.fzdkx.spring.beans.factory.config.BeanDefinition;
-import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
-import com.fzdkx.spring.beans.factory.config.ConfigurableBeanFactory;
-import com.fzdkx.spring.beans.factory.config.AdvisorAutoProxyCreator;
+import com.fzdkx.spring.beans.factory.config.*;
 import com.fzdkx.spring.util.BeanFactoryUtil;
 import com.fzdkx.spring.util.ClassUtils;
+import com.fzdkx.spring.util.StringValueResolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +25,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
     private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
     private volatile boolean hasInstantiationAwareBeanPostProcessors;
+
+    private final List<StringValueResolver> embeddedValueResolvers = new ArrayList<>();
 
     private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
 
@@ -185,10 +185,26 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         if (beanPostProcessor != null) {
             this.beanPostProcessors.remove(beanPostProcessor);
             this.beanPostProcessors.add(beanPostProcessor);
-            if (beanPostProcessor instanceof AdvisorAutoProxyCreator) {
+            if (beanPostProcessor instanceof InstantiationAwareBeanPostProcessor) {
                 this.hasInstantiationAwareBeanPostProcessors = true;
             }
         }
+    }
+
+    @Override
+    public void addEmbeddedValueResolver(StringValueResolver valueResolver) {
+        this.embeddedValueResolvers.add(valueResolver);
+    }
+
+    @Override
+    public String resolveEmbeddedValue(String value) {
+        String result = value;
+        // 获取所有的解析器，一个配置文件一个解析器
+        for (StringValueResolver resolver : this.embeddedValueResolvers) {
+            // 如果配置文件中有对应的 key-value，那么替换，如果没有，原样返回
+            result = resolver.resolveStringValue(result);
+        }
+        return result;
     }
 
     public List<BeanPostProcessor> getBeanPostProcessors() {
@@ -204,5 +220,10 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
     public boolean isHasInstantiationAwareBeanPostProcessors() {
         return this.hasInstantiationAwareBeanPostProcessors;
     }
+
+    public List<StringValueResolver> getEmbeddedValueResolvers() {
+        return embeddedValueResolvers;
+    }
+
 
 }

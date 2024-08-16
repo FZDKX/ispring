@@ -1,6 +1,7 @@
 package com.fzdkx.spring.beans.factory.config;
 
 import com.fzdkx.spring.beans.factory.HierarchicalBeanFactory;
+import com.fzdkx.spring.util.StringValueResolver;
 
 /**
  * @author 发着呆看星
@@ -20,4 +21,9 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
 
     // 销毁 单例Bean
     void destroySingletons();
+
+
+    void addEmbeddedValueResolver(StringValueResolver valueResolver);
+
+    String resolveEmbeddedValue(String value);
 }

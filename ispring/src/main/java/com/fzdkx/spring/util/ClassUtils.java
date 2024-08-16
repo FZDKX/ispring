@@ -1,8 +1,5 @@
 package com.fzdkx.spring.util;
 
-import com.fzdkx.spring.beans.factory.config.BeanDefinition;
-import com.fzdkx.spring.context.annotation.Component;
-
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.net.URL;

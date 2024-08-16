@@ -2,6 +2,8 @@ package com.fzdkx.spring.test.xhyl;
 
 import com.fzdkx.spring.beans.factory.DisposableBean;
 import com.fzdkx.spring.beans.factory.InitializingBean;
+import com.fzdkx.spring.context.annotation.Autowired;
+import com.fzdkx.spring.context.annotation.Component;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -9,8 +11,11 @@ import lombok.extern.slf4j.Slf4j;
  * @create 2024/8/11
  */
 @Slf4j
+@Component
 public class Cat implements InitializingBean , DisposableBean {
     private Integer id;
+
+    @Autowired
     Person person;
 
     public Cat() {

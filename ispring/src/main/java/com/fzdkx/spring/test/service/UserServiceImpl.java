@@ -1,6 +1,9 @@
 package com.fzdkx.spring.test.service;
 
+import com.fzdkx.spring.context.annotation.Autowired;
 import com.fzdkx.spring.context.annotation.Component;
+import com.fzdkx.spring.context.annotation.Value;
+import com.fzdkx.spring.test.xhyl.Person;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -10,6 +13,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component("userService")
 public class UserServiceImpl implements UserService {
+
+    @Value("${username}")
+    private String username;
+
+    @Value("${password}")
+    private String password;
+
+    @Autowired
+    private Person person;
+
     @Override
     public String queryUserInfo() {
         log.debug("目标方法调用：正在查询用户信息......");

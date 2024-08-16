@@ -42,11 +42,17 @@ public class Test01 {
 
     @Test
     public void t2() {
-        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:aop.xml");
-        UserService userService = applicationContext.getBean("userService", UserService.class);
+        ClassPathXmlApplicationContext app = new ClassPathXmlApplicationContext("classpath:aop.xml");
+        UserService userService = app.getBean("userService", UserService.class);
         log.debug(userService.queryUserInfo());
         log.debug("===========================");
         userService.register("zs");
+        log.debug("===========================");
+        for (String name : app.getBeanDefinitionNames()) {
+            System.out.println(name);
+        }
+        System.out.println("==================");
+        System.out.println(userService);
     }
 
 }

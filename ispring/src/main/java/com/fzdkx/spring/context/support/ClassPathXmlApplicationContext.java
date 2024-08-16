@@ -45,4 +45,9 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) {
         getBeanFactory().registerBeanDefinition(beanName,beanDefinition);
     }
+
+    @Override
+    public void registerBeanDefinition(BeanDefinition beanDefinition) {
+        getBeanFactory().registerBeanDefinition(beanDefinition);
+    }
 }

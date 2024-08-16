@@ -1,5 +1,7 @@
 package com.fzdkx.spring.test.xhyl;
 
+import com.fzdkx.spring.context.annotation.Autowired;
+import com.fzdkx.spring.context.annotation.Component;
 import com.fzdkx.spring.context.annotation.Order;
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,9 +10,11 @@ import lombok.extern.slf4j.Slf4j;
  * @create 2024/8/10
  */
 @Slf4j
-@Order(1)
+@Component
 public class Person {
     private Integer id;
+
+    @Autowired
     private Cat cat;
 
     public Person() {

@@ -6,6 +6,7 @@ import com.fzdkx.spring.beans.factory.ConfigurableListableBeanFactory;
 import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 import com.fzdkx.spring.beans.factory.config.BeanFactoryPostProcessor;
 import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
+import com.fzdkx.spring.beans.factory.support.AutowiredAnnotationBeanPostProcessor;
 import com.fzdkx.spring.context.ApplicationEvent;
 import com.fzdkx.spring.context.ApplicationListener;
 import com.fzdkx.spring.context.ConfigurableApplicationContext;
@@ -104,15 +105,23 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
     // 注册 BeanPostProcessors
     private void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory) {
-        // 如果开启AOP
-        BeanDefinition bd = new BeanDefinition(DefaultAdvisorAutoProxyCreator.class);
-        registerBeanDefinition(DefaultAdvisorAutoProxyCreator.DEFAULT_NAME, bd);
+        // 注册系统BeanPostProcess
+        registerSystemBeanPostProcessors();
         // 注册
         Map<String, BeanPostProcessor> map = beanFactory.getBeansOfType(BeanPostProcessor.class);
         for (BeanPostProcessor beanPostProcessor : map.values()) {
             // 添加BeanPostProcessors
             beanFactory.addBeanPostProcessor(beanPostProcessor);
         }
+    }
+
+    private void registerSystemBeanPostProcessors() {
+        // AOP
+        BeanDefinition aop = new BeanDefinition(DefaultAdvisorAutoProxyCreator.class);
+        registerBeanDefinition(aop);
+        // 注解
+        BeanDefinition autowired = new BeanDefinition(AutowiredAnnotationBeanPostProcessor.class);
+        registerBeanDefinition(autowired);
     }
 
     @Override

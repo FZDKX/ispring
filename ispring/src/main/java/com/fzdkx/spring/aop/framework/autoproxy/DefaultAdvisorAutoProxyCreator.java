@@ -1,6 +1,9 @@
 package com.fzdkx.spring.aop.framework.autoproxy;
 
-import com.fzdkx.spring.aop.*;
+import com.fzdkx.spring.aop.AdvisedSupport;
+import com.fzdkx.spring.aop.ClassFilter;
+import com.fzdkx.spring.aop.DefaultAspect;
+import com.fzdkx.spring.aop.TargetSource;
 import com.fzdkx.spring.aop.annotation.Aspect;
 import com.fzdkx.spring.aop.aspectj.AspectInfo;
 import com.fzdkx.spring.aop.aspectj.AspectJExpressionPointcut;
@@ -10,7 +13,8 @@ import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.BeanFactory;
 import com.fzdkx.spring.beans.factory.BeanFactoryAware;
 import com.fzdkx.spring.beans.factory.config.BeanDefinition;
-import com.fzdkx.spring.beans.factory.config.AdvisorAutoProxyCreator;
+import com.fzdkx.spring.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import com.fzdkx.spring.beans.factory.config.PropertyValues;
 import com.fzdkx.spring.beans.factory.support.DefaultListableBeanFactory;
 import com.fzdkx.spring.context.annotation.Order;
 import com.fzdkx.spring.util.StringUtils;
@@ -24,7 +28,7 @@ import java.util.Set;
  * @create 2024/8/13
  * 融入Bean生命周期的核心：自动代理创建者，是一个Bean后置处理器
  */
-public class DefaultAdvisorAutoProxyCreator implements AdvisorAutoProxyCreator, BeanFactoryAware {
+public class DefaultAdvisorAutoProxyCreator extends InstantiationAwareBeanPostProcessor implements BeanFactoryAware {
 
     public static final String DEFAULT_NAME = "defaultAdvisorAutoProxyCreator";
 
@@ -39,7 +43,7 @@ public class DefaultAdvisorAutoProxyCreator implements AdvisorAutoProxyCreator, 
     }
 
     @Override
-    public void initAop() throws BeansException {
+    public void prepareInstantiationAware() {
         // 获取所有的Advisor
         loadAdvisors();
     }

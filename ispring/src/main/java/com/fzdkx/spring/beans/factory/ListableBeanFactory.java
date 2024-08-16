@@ -24,4 +24,7 @@ public interface ListableBeanFactory extends BeanFactory{
 
     // 注册BeanDefinition
     void registerBeanDefinition(String beanName, BeanDefinition beanDefinition);
+
+    void registerBeanDefinition(BeanDefinition beanDefinition);
+
 }

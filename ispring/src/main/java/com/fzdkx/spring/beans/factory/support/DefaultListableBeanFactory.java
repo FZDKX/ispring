@@ -1,11 +1,12 @@
 package com.fzdkx.spring.beans.factory.support;
 
-import com.fzdkx.spring.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import com.fzdkx.spring.beans.exception.BeanDefinitionStoreException;
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.exception.NoSuchBeanDefinitionException;
 import com.fzdkx.spring.beans.factory.ConfigurableListableBeanFactory;
 import com.fzdkx.spring.beans.factory.config.BeanDefinition;
+import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
+import com.fzdkx.spring.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import com.fzdkx.spring.util.StringUtils;
 
 import java.lang.annotation.Annotation;
@@ -58,6 +59,13 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     }
 
     @Override
+    public void registerBeanDefinition(BeanDefinition beanDefinition) {
+        String simpleName = beanDefinition.getBeanClass().getSimpleName();
+        String beanName = StringUtils.lowerFirst(simpleName);
+        registerBeanDefinition(beanName, beanDefinition);
+    }
+
+    @Override
     public void removeBeanDefinition(String beanName) throws NoSuchBeanDefinitionException {
         BeanDefinition beanDefinition = getBeanDefinition(beanName);
         if (beanDefinition == null) {
@@ -81,7 +89,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 
     @Override
     public void preInstantiateSingletons() throws BeansException {
-        initAop();
+        // 运行BeanPostProcess进行准备工作
+        prepareBeanPostProcess();
         // 普通bean初始化
         ArrayList<String> names = new ArrayList<>(beanDefinitionNames);
         for (String name : names) {
@@ -98,9 +107,27 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
         }
     }
 
-    private void initAop() {
-        DefaultAdvisorAutoProxyCreator autoProxyCreator = getBean(DefaultAdvisorAutoProxyCreator.DEFAULT_NAME, DefaultAdvisorAutoProxyCreator.class);
-        autoProxyCreator.initAop();
+    @Override
+    public List<BeanDefinition> getBeanDefinitionByType(Class<?> type) {
+        List<BeanDefinition> list = new ArrayList<>();
+        for (Map.Entry<String, BeanDefinition> entry : beanDefinitionMap.entrySet()) {
+            Class<?> clazz = entry.getValue().getBeanClass();
+            // 判断 type 是否是 beanClass 的 同类 或 父类 或 接口
+            if (type.isAssignableFrom(clazz)) {
+                // 如果是，加入
+                list.add(entry.getValue());
+            }
+        }
+        return list;
+    }
+
+    private void prepareBeanPostProcess() {
+        for (BeanPostProcessor bpp : getBeanPostProcessors()) {
+            if (bpp instanceof InstantiationAwareBeanPostProcessor) {
+                InstantiationAwareBeanPostProcessor ibpp = (InstantiationAwareBeanPostProcessor) bpp;
+                ibpp.prepareInstantiationAware();
+            }
+        }
     }
 
     @Override
@@ -111,7 +138,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     @Override
     public <T> Map<String, T> getBeansOfType(Class<T> type) throws BeansException {
         HashMap<String, T> map = new HashMap<>();
-        for (Map.Entry<String, BeanDefinition> entry : singletonBeanDefinitionMap.entrySet()) {
+        for (Map.Entry<String, BeanDefinition> entry : beanDefinitionMap.entrySet()) {
             Class<?> clazz = entry.getValue().getBeanClass();
             // 判断 type 是否是 beanClass 的 同类 或 父类 或 接口
             if (type.isAssignableFrom(clazz)) {
@@ -141,7 +168,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     @Override
     public List<String> getBeanNamesOfType(Class<Object> type) {
         ArrayList<String> list = new ArrayList<>();
-        singletonBeanDefinitionMap.forEach((beanName, deanDefinition) -> {
+        beanDefinitionMap.forEach((beanName, deanDefinition) -> {
             Class<?> clazz = deanDefinition.getBeanClass();
             // 判断 type 是否是 beanClass 的 同类 或 父类 或 接口
             if (type.isAssignableFrom(clazz)) {
@@ -156,7 +183,7 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     public Set<BeanDefinition> getClassByAnnotation(Class<? extends Annotation> clazz) {
         Set<BeanDefinition> set = new HashSet<>();
         // 获取所有的单例bean
-        for (Map.Entry<String, BeanDefinition> entry : singletonBeanDefinitionMap.entrySet()) {
+        for (Map.Entry<String, BeanDefinition> entry : beanDefinitionMap.entrySet()) {
             Class<?> beanClass = entry.getValue().getBeanClass();
             if (beanClass.isAnnotationPresent(clazz)) {
                 set.add(entry.getValue());

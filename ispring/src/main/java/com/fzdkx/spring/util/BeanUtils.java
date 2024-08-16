@@ -12,6 +12,16 @@ import java.util.Collection;
  */
 public class BeanUtils {
 
+
+    public static void setFieldValue(Object bean, Field field, Object value) {
+        try {
+            field.setAccessible(true);
+            field.set(bean, value);
+        } catch (IllegalAccessException e) {
+            throw new PropertyInjectException("属性注入失败");
+        }
+    }
+
     // 无转换
     public static void setFieldValue(Object bean, String fieldName, Object value) {
         Class<?> clazz = bean.getClass();

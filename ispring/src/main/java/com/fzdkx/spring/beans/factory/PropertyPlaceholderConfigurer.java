@@ -8,6 +8,7 @@ import com.fzdkx.spring.beans.factory.config.PropertyValues;
 import com.fzdkx.spring.core.io.DefaultResourceLoader;
 import com.fzdkx.spring.core.io.Resource;
 import com.fzdkx.spring.util.StringUtils;
+import com.fzdkx.spring.util.StringValueResolver;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -49,34 +50,55 @@ public class PropertyPlaceholderConfigurer implements BeanFactoryPostProcessor {
                     if (!(value instanceof String)) {
                         continue;
                     }
-                    // 是字符串，判断是否含有 占位符
-                    StringBuilder sb = new StringBuilder((String) value);
-                    // 获取前缀索引
-                    int start = sb.indexOf(DEFAULT_PLACEHOLDER_PREFIX);
-                    // 获取后缀索引
-                    int end = sb.indexOf(DEFAULT_PLACEHOLDER_SUFFIX);
-                    // 如果含有，替换
-                    if (start != -1 && end != -1 && start < end) {
-                        // 获取key
-                        String key = sb.substring(start + 2, end);
-                        // 从properties中获取value
-                        String property = properties.getProperty(key);
-                        // 没有，报错
-                        if (StringUtils.isEmpty(property)) {
-                            throw new BeansException("properties中无：" + key);
-                        }
-                        // 有，替换
-                        sb.replace(start, end + 1, property);
-                        propertyValue.setValue(sb.toString());
-                    }
+                    propertyValue.setValue(resolvePlaceholder((String) value, properties));
                 }
+                // 向容器中注入 字符串解析器，以解析@Value注解
+                // 一个配置文件 一个 解析器
+                beanFactory.addEmbeddedValueResolver(new PlaceholderResolvingStringValueResolver(properties));
             }
         } catch (IOException e) {
             throw new RuntimeException("没有找到配置文件：" + location);
         }
     }
 
+    public String resolvePlaceholder(String value, Properties properties) {
+        // 是字符串，解析，替换
+        StringBuilder sb = new StringBuilder(value);
+        // 获取前缀索引
+        int start = sb.indexOf(DEFAULT_PLACEHOLDER_PREFIX);
+        // 获取后缀索引
+        int end = sb.indexOf(DEFAULT_PLACEHOLDER_SUFFIX);
+        // 如果含有，替换
+        if (start != -1 && end != -1 && start < end) {
+            // 获取key
+            String key = sb.substring(start + 2, end);
+            // 从properties中获取value
+            String property = properties.getProperty(key);
+            // 有，替换
+            if (!StringUtils.isEmpty(property)) {
+                sb.replace(start, end + 1, property);
+            }
+        }
+        return sb.toString();
+    }
+
     public void setLocation(String location) {
         this.location = location;
+    }
+
+
+    public class PlaceholderResolvingStringValueResolver implements StringValueResolver {
+
+        // 配置文件
+        private final Properties properties;
+
+        public PlaceholderResolvingStringValueResolver(Properties properties) {
+            this.properties = properties;
+        }
+
+        @Override
+        public String resolveStringValue(String strVal) {
+            return resolvePlaceholder(strVal, properties);
+        }
     }
 }

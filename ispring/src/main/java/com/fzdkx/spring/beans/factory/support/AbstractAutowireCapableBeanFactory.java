@@ -39,6 +39,9 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
             // 将Bean封装成FactoryBean，加入三级缓存
             addSingletonFactory(name, () -> getEarlyBeanReference(name, beanDefinition, existingBean));
         }
+        // 在属性赋值之前，运行BeanPostProcess，修改属性值
+        // 在设置 Bean 属性之前，允许 BeanPostProcessor 修改属性值
+        applyBeanPostProcessorsBeforeApplyingPropertyValues(name, bean, beanDefinition);
         // 属性赋值
         populateBean(name, bean, beanDefinition);
         // 初始化Bean - 相关接口回调
@@ -51,6 +54,16 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         // 移除正在加载的状态
         afterSingletonCreation(name);
         return bean;
+    }
+
+    private void applyBeanPostProcessorsBeforeApplyingPropertyValues(String name, Object bean, BeanDefinition bd) {
+        for (BeanPostProcessor bpp : getBeanPostProcessors()) {
+            if (bpp instanceof InstantiationAwareBeanPostProcessor) {
+                InstantiationAwareBeanPostProcessor ibpp = (InstantiationAwareBeanPostProcessor) bpp;
+                ibpp.postProcessPropertyValues(bd, bean, name);
+            }
+        }
+
     }
 
     private void registerDisposableBeanIfNecessary(String name, Object bean, BeanDefinition bd) {
@@ -180,8 +193,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object exposedObject = bean;
         if (isHasInstantiationAwareBeanPostProcessors()) {
             for (BeanPostProcessor bpp : getBeanPostProcessors()) {
-                if (bpp instanceof AdvisorAutoProxyCreator) {
-                    AdvisorAutoProxyCreator ibpp = (AdvisorAutoProxyCreator) bpp;
+                if (bpp instanceof InstantiationAwareBeanPostProcessor) {
+                    InstantiationAwareBeanPostProcessor ibpp = (InstantiationAwareBeanPostProcessor) bpp;
                     exposedObject = ibpp.getEarlyBeanReference(exposedObject, beanName, bd);
                 }
             }
