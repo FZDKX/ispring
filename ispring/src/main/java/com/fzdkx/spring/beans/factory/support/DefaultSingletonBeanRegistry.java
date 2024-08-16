@@ -54,8 +54,13 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
                             ObjectFactory<?> singletonFactory = this.singletonFactories.get(beanName);
                             // 如果有，调用getObject
                             if (singletonFactory != null) {
+                                // 提前暴露
+                                // 如果需要代理，那么会提前创建代理对象
+                                // 如果无需代理，返回原始bean
                                 singletonObject = singletonFactory.getObject();
+                                // 加入二级缓存
                                 this.earlySingletonObjects.put(beanName, singletonObject);
+                                // 从三级缓存中移除
                                 this.singletonFactories.remove(beanName);
                             }
                         }
@@ -80,6 +85,8 @@ public class DefaultSingletonBeanRegistry implements SingletonBeanRegistry {
                 // 创建Bean
                 bean = singletonFactory.getObject();
                 // 添加
+                // 将最终的bean，加入一级缓存
+                // 移除 二级与三级缓存中的 数据
                 addSingleton(beanName, bean);
             }
             return bean;

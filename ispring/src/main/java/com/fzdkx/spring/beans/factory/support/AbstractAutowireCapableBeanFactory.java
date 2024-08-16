@@ -35,25 +35,30 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         bean = createBeanInstance(name, beanDefinition);
         // 如果是单例bean，并且正在创建中
         if (beanDefinition.isSingleton() && isSingletonCurrentlyInCreation(name)) {
-            Object existingBean = bean;
             // 将Bean封装成FactoryBean，加入三级缓存
-            addSingletonFactory(name, () -> getEarlyBeanReference(name, beanDefinition, existingBean));
+            addSingletonFactory(name, () -> getEarlyBeanReference(name, beanDefinition, bean));
         }
-        // 在属性赋值之前，运行BeanPostProcess，修改属性值
         // 在设置 Bean 属性之前，允许 BeanPostProcessor 修改属性值
         applyBeanPostProcessorsBeforeApplyingPropertyValues(name, bean, beanDefinition);
         // 属性赋值
+        Object exposedObject = bean;
         populateBean(name, bean, beanDefinition);
-        // 初始化Bean - 相关接口回调
-        initializeBean(name, bean, beanDefinition);
-        // 从容器中获取bean，如果仍是 ObjectFactory ，那么调用getObject方法
-        // 并加入二级缓存，异移除三级缓存
-        bean = getSingleton(name);
+        // 初始化Bean - 相关接口回调 ，可能会创建代理bean，并返回
+        exposedObject = initializeBean(name, exposedObject, beanDefinition);
+        // 调用getSingleton()，从三级缓存中获取 ObjectFactory，调用getObject
+        Object earlySingletonReference = getSingleton(name);
+        // 如果相等，代表 after方法 未进行代理，那么替换为 getSingleton 返回的对象，因为可能在这尝试代理
+        // 如果不相等，那么生成了代理，无需使用 getSingleton 返回的对象
+        if (exposedObject == bean){
+            exposedObject = earlySingletonReference;
+
+        }
         // 注册定义了 销毁方法的Bean，当容器关闭时，调用这些Bean的销毁方法
         registerDisposableBeanIfNecessary(name, bean, beanDefinition);
         // 移除正在加载的状态
         afterSingletonCreation(name);
-        return bean;
+        // 返回最终的对象，如果对象需要代理，那么这个对象一定是代理对象，且只被代理一次
+        return exposedObject;
     }
 
     private void applyBeanPostProcessorsBeforeApplyingPropertyValues(String name, Object bean, BeanDefinition bd) {
