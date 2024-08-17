@@ -40,7 +40,7 @@ public class BeanUtils {
         Class<?> clazz = bean.getClass();
         try {
             Field field = clazz.getDeclaredField(fieldName);
-            value = SimpleDataType.convert((String) value, field.getType());
+            value = SimpleDataType.parseNumber((String) value, field.getType());
             field.setAccessible(true);
             field.set(bean, value);
         } catch (NoSuchFieldException | IllegalAccessException e) {

@@ -4,7 +4,11 @@ import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.exception.NoSuchBeanDefinitionException;
 import com.fzdkx.spring.beans.factory.BeanFactory;
 import com.fzdkx.spring.beans.factory.FactoryBean;
-import com.fzdkx.spring.beans.factory.config.*;
+import com.fzdkx.spring.beans.factory.config.BeanDefinition;
+import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
+import com.fzdkx.spring.beans.factory.config.ConfigurableBeanFactory;
+import com.fzdkx.spring.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import com.fzdkx.spring.core.convert.ConversionService;
 import com.fzdkx.spring.util.BeanFactoryUtil;
 import com.fzdkx.spring.util.ClassUtils;
 import com.fzdkx.spring.util.StringValueResolver;
@@ -29,6 +33,8 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
     private final List<StringValueResolver> embeddedValueResolvers = new ArrayList<>();
 
     private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
+
+    private ConversionService conversionService;
 
     @Override
     public boolean containsBean(String name) throws BeansException {
@@ -205,6 +211,17 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
             result = resolver.resolveStringValue(result);
         }
         return result;
+    }
+
+    // 获取转换服务
+    @Override
+    public ConversionService getConversionService() {
+        return this.conversionService;
+    }
+
+    @Override
+    public void setConversionService(ConversionService conversionService) {
+        this.conversionService = conversionService;
     }
 
     public List<BeanPostProcessor> getBeanPostProcessors() {

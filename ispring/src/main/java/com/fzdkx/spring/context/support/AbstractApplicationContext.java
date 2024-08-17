@@ -14,6 +14,7 @@ import com.fzdkx.spring.context.event.ApplicationEventMulticaster;
 import com.fzdkx.spring.context.event.ContextClosedEvent;
 import com.fzdkx.spring.context.event.ContextRefreshedEvent;
 import com.fzdkx.spring.context.event.SimpleApplicationEventMulticaster;
+import com.fzdkx.spring.core.convert.ConversionService;
 import com.fzdkx.spring.core.io.DefaultResourceLoader;
 
 import java.util.Collection;
@@ -82,6 +83,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
     // 创建所有剩下的单例Bean
     private void finishBeanFactoryInitialization(ConfigurableListableBeanFactory beanFactory) {
+        // 实例化Bean
         beanFactory.preInstantiateSingletons();
     }
 
@@ -94,6 +96,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
 
     // 执行所有BeanFactoryPostProcess的方法
     private void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
+        // 提前实例化类型转换器
+        Object conversionService = beanFactory.getBean("conversionService");
+        if (conversionService instanceof ConversionService) {
+            beanFactory.setConversionService((ConversionService) conversionService);
+        }
         // 获取所有的 BeanFactoryPostProcess
         Map<String, BeanFactoryPostProcessor> map = beanFactory.getBeansOfType(BeanFactoryPostProcessor.class);
         // 遍历这些 BeanFactoryPostProcess，执行方法

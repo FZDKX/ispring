@@ -4,10 +4,12 @@ import com.fzdkx.spring.beans.exception.BeanInstanceException;
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.*;
 import com.fzdkx.spring.beans.factory.config.*;
+import com.fzdkx.spring.core.convert.ConversionService;
 import com.fzdkx.spring.util.BeanUtils;
 import com.fzdkx.spring.util.StringUtils;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Map;
@@ -49,7 +51,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         Object earlySingletonReference = getSingleton(name);
         // 如果相等，代表 after方法 未进行代理，那么替换为 getSingleton 返回的对象，因为可能在这尝试代理
         // 如果不相等，那么生成了代理，无需使用 getSingleton 返回的对象
-        if (exposedObject == bean){
+        if (exposedObject == bean) {
             exposedObject = earlySingletonReference;
 
         }
@@ -141,15 +143,27 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         // Bean需要进行属性填充
         PropertyValues propertyValues = bd.getPropertyValues();
         for (PropertyValue pv : propertyValues.getPropertyValues()) {
-            String name = pv.getPropertyName();
+            String fieldName = pv.getPropertyName();
             Object value = pv.getValue();
             if (value instanceof BeanReference) {
                 BeanReference br = (BeanReference) value;
                 value = getBean(br.getBeanName());
                 // 属性填充，反射
-                BeanUtils.setFieldValue(bean, name, value);
+                BeanUtils.setFieldValue(bean, fieldName, value);
             } else {
-                BeanUtils.convertAndSetFieldValue(bean, name, value);
+                try {
+                    ConversionService conversionService = getConversionService();
+                    Field field = bean.getClass().getDeclaredField(fieldName);
+                    Object convertValue = value;
+                    // 如果含有转换器，转换
+                    if (conversionService.canConvert(String.class, field.getType())) {
+                        convertValue = conversionService.convert(value, field.getType());
+                    }
+                    // 属性填充，反射
+                    BeanUtils.setFieldValue(bean, fieldName, convertValue);
+                } catch (NoSuchFieldException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
@@ -223,6 +237,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
         for (int i = 0; i < n; i++) {
             // 如果map中有，从map中获取
             ConstructorArgument.ValueHolder holder = map.get(i);
+            // 如果是引用Bean
             if (holder.getValue() instanceof BeanReference) {
                 if ((holder.getType() == types[i])) {
                     args[i] = holder.getValue();
@@ -231,14 +246,26 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
                 else {
                     return null;
                 }
-            } else {
-                for (Class<?> aClass : SimpleDataType.getSimpleDataType()) {
-                    if (aClass == types[i]) {
-                        holder.setType(aClass);
-                        holder.setValue(SimpleDataType.convert((String) holder.getValue(), types[i]));
-                        break;
-                    }
+            }
+            // 如果是直接赋值
+            else {
+
+                ConversionService conversionService = getConversionService();
+                Object convertValue;
+                // 如果含有转换器，转换
+                if (conversionService.canConvert(String.class, types[i])) {
+                    convertValue = conversionService.convert(holder.getValue(), types[i]);
+                    holder.setValue(convertValue);
                 }
+
+//                // 获取
+//                for (Class<?> aClass : SimpleDataType.getSimpleDataType()) {
+//                    if (aClass == types[i]) {
+//                        holder.setType(aClass);
+//                        holder.setValue(SimpleDataType.parseNumber((String) holder.getValue(), types[i]));
+//                        break;
+//                    }
+//                }
                 args[i] = holder.getValue();
             }
         }

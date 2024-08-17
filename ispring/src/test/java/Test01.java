@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
+import java.util.Date;
 
 /**
  * @author 发着呆看星
@@ -53,6 +54,12 @@ public class Test01 {
         }
         System.out.println("==================");
         System.out.println(userService);
+    }
+
+    @Test
+    public void t3(){
+        Date date = new Date("2021-01-23");
+        System.out.println(date);
     }
 
 }

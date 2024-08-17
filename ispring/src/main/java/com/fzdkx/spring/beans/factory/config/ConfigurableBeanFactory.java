@@ -1,6 +1,7 @@
 package com.fzdkx.spring.beans.factory.config;
 
 import com.fzdkx.spring.beans.factory.HierarchicalBeanFactory;
+import com.fzdkx.spring.core.convert.ConversionService;
 import com.fzdkx.spring.util.StringValueResolver;
 
 /**
@@ -26,4 +27,10 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
     void addEmbeddedValueResolver(StringValueResolver valueResolver);
 
     String resolveEmbeddedValue(String value);
+
+    // 获取转换器
+    ConversionService getConversionService();
+
+    // 设置转换服务
+    void setConversionService(ConversionService conversionService);
 }

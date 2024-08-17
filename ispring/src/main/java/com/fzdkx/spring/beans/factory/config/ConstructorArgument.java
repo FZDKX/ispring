@@ -48,8 +48,6 @@ public class ConstructorArgument {
             this.value = value;
         }
 
-
-
         public Class<?> getType() {
             return type;
         }

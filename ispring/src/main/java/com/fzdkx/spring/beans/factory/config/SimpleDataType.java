@@ -7,6 +7,7 @@ import com.fzdkx.spring.beans.exception.BeanInstanceException;
  * @create 2024/8/11
  */
 public class SimpleDataType {
+
     // 定义基本数据类型数组
     public static Class<?>[] getSimpleDataType() {
         return new Class[]{
@@ -15,28 +16,29 @@ public class SimpleDataType {
         };
     }
 
-    public static Object convert(String value, Class<?> clazz) {
+    public static <T> T parseNumber(String value, Class<T> clazz) {
         if (clazz == Byte.class) {
-            return new Byte(value);
+            return (T) new Byte(value);
         } else if (clazz == Short.class) {
-            return new Short(value);
+            return (T) new Short(value);
         } else if (clazz == Integer.class) {
-            return new Integer(value);
+            return (T) new Integer(value);
         } else if (clazz == Long.class) {
-            return new Long(value);
+            return (T) new Long(value);
         } else if (clazz == Float.class) {
-            return new Float(value);
+            return (T) new Float(value);
         } else if (clazz == Double.class) {
-            return new Double(value);
+            return (T) new Double(value);
         } else if (clazz == Boolean.class) {
-            return Boolean.valueOf(value);
+            return (T) Boolean.valueOf(value);
         } else if (clazz == Character.class) {
             if (value.length() == 1) {
-                return value.charAt(0);
+                return (T) new Character(value.charAt(0));
             }
-        }else if (clazz == String.class) {
-            return value;
+        } else if (clazz == String.class) {
+            return (T) value;
         }
         throw new BeanInstanceException("转换异常");
     }
+
 }
