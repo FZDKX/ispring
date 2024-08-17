@@ -17,13 +17,9 @@ public class ClassPathScanningCandidateComponentProvider {
      * 寻找 basePackage 路径下 加了Component注解的类
      * @param basePackage 类路径
      */
-    public Set<BeanDefinition> findCandidateComponents(String basePackage) {
+    public Set<Class<?>> findCandidateComponents(String basePackage) {
         Set<BeanDefinition> candidates = new LinkedHashSet<>();
-        Set<Class<?>> classes = ClassUtils.scanPackageByAnnotation(basePackage, Component.class);
-        for (Class<?> clazz : classes) {
-            candidates.add(new BeanDefinition(clazz));
-        }
-        return candidates;
+        return ClassUtils.scanPackageByAnnotation(basePackage, Component.class);
     }
 
 }

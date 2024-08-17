@@ -4,6 +4,7 @@ package com.fzdkx.spring.beans.factory.config;
 import lombok.Data;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
 /**
@@ -13,6 +14,7 @@ import java.lang.reflect.Parameter;
  */
 @Data
 public class BeanDefinition {
+
     String SCOPE_SINGLETON = ConfigurableBeanFactory.SCOPE_SINGLETON;
 
     String SCOPE_PROTOTYPE = ConfigurableBeanFactory.SCOPE_PROTOTYPE;
@@ -36,6 +38,14 @@ public class BeanDefinition {
     private ConstructorArgument constructorArgument;
 
     private boolean isFactoryBean = false;
+
+    private boolean isConfiguration = false;
+
+    private boolean isMethodCreate = false;
+
+    private Method createMethod;
+
+    private String configurationName;
 
     public BeanDefinition() {
     }
@@ -118,7 +128,7 @@ public class BeanDefinition {
     }
 
     public PropertyValues getPropertyValues() {
-        if (propertyValues == null){
+        if (propertyValues == null) {
             this.propertyValues = new PropertyValues();
         }
         return propertyValues;
@@ -161,4 +171,27 @@ public class BeanDefinition {
         isFactoryBean = factoryBean;
     }
 
+    public boolean isConfiguration() {
+        return isConfiguration;
+    }
+
+    public void setConfiguration(boolean configuration) {
+        isConfiguration = configuration;
+    }
+
+    public boolean isMethodCreate() {
+        return isMethodCreate;
+    }
+
+    public void setMethodCreate(boolean methodCreate) {
+        isMethodCreate = methodCreate;
+    }
+
+    public Method getCreateMethod() {
+        return createMethod;
+    }
+
+    public void setCreateMethod(Method method) {
+        this.createMethod = method;
+    }
 }

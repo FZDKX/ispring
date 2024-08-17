@@ -39,4 +39,6 @@ public interface BeanFactory {
     // 获取容器中，所有被标记某个注解的类
     Set<BeanDefinition> getClassByAnnotation(Class<? extends Annotation> clazz);
 
+    List<BeanDefinition> getBeanDefinitionByType(Class<?> type);
+
 }

@@ -33,6 +33,13 @@
         </xs:complexType>
     </xs:element>
 
+    <!-- component-scan -->
+    <xs:element name="properties-source">
+        <xs:complexType>
+            <xs:attribute name="locations" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
     <!--property-->
     <xs:element name="property">
         <xs:complexType>
@@ -79,6 +86,7 @@
             <xs:choice minOccurs="0" maxOccurs="unbounded">
                 <xs:element ref="bean"/>
                 <xs:element ref="component-scan"/>
+                <xs:element ref="properties-source"/>
             </xs:choice>
         </xs:complexType>
     </xs:element>

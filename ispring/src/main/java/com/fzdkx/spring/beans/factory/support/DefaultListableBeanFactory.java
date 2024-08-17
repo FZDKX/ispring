@@ -161,11 +161,6 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
     }
 
     @Override
-    public int getBeanDefinitionCount() {
-        return beanDefinitionNames.size();
-    }
-
-    @Override
     public List<String> getBeanNamesOfType(Class<Object> type) {
         ArrayList<String> list = new ArrayList<>();
         beanDefinitionMap.forEach((beanName, deanDefinition) -> {

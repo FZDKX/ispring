@@ -2,6 +2,7 @@ package com.fzdkx.spring.test.service;
 
 import com.fzdkx.spring.context.annotation.Autowired;
 import com.fzdkx.spring.context.annotation.Component;
+import com.fzdkx.spring.context.annotation.PropertiesSource;
 import com.fzdkx.spring.context.annotation.Value;
 import com.fzdkx.spring.test.xhyl.Person;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Component("userService")
+@PropertiesSource("jdbc.properties")
 public class UserServiceImpl implements UserService {
 
     @Value("${username}")

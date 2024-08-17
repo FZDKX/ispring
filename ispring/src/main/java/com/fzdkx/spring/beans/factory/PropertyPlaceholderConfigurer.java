@@ -7,11 +7,14 @@ import com.fzdkx.spring.beans.factory.config.PropertyValue;
 import com.fzdkx.spring.beans.factory.config.PropertyValues;
 import com.fzdkx.spring.core.io.DefaultResourceLoader;
 import com.fzdkx.spring.core.io.Resource;
+import com.fzdkx.spring.core.io.ResourceLoader;
 import com.fzdkx.spring.util.StringUtils;
 import com.fzdkx.spring.util.StringValueResolver;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * @author 发着呆看星
@@ -27,37 +30,39 @@ public class PropertyPlaceholderConfigurer implements BeanFactoryPostProcessor {
     public static final String DEFAULT_PLACEHOLDER_SUFFIX = "}";
 
     // 文件路径
-    private String location;
+    private final Set<String> locations = new HashSet<>();
 
     @Override
     //  加载 properties 配置文件，如果BeanDefinition的PropertyValue中含有占位符，替换
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        try {
-            // 加载 properties 配置文件
-            DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
-            Resource resource = resourceLoader.getResource(location);
-            Properties properties = new Properties();
-            properties.load(resource.getInputStream());
-            // 获取所有的BeanDefinition
-            String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
-            for (String beanName : beanDefinitionNames) {
-                // 获取beanDefinition
-                BeanDefinition bd = beanFactory.getBeanDefinition(beanName);
-                // 对属性值进行占位符替换
-                PropertyValues propertyValues = bd.getPropertyValues();
-                for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
-                    Object value = propertyValue.getValue();
-                    if (!(value instanceof String)) {
-                        continue;
+        for (String location : locations) {
+            try {
+                // 加载 properties 配置文件
+                DefaultResourceLoader resourceLoader = new DefaultResourceLoader();
+                Resource resource = resourceLoader.getResource(ResourceLoader.CLASSPATH_URL_PREFIX + location);
+                Properties properties = new Properties();
+                properties.load(resource.getInputStream());
+                // 获取所有的BeanDefinition
+                String[] beanDefinitionNames = beanFactory.getBeanDefinitionNames();
+                for (String beanName : beanDefinitionNames) {
+                    // 获取beanDefinition
+                    BeanDefinition bd = beanFactory.getBeanDefinition(beanName);
+                    // 对属性值进行占位符替换
+                    PropertyValues propertyValues = bd.getPropertyValues();
+                    for (PropertyValue propertyValue : propertyValues.getPropertyValues()) {
+                        Object value = propertyValue.getValue();
+                        if (!(value instanceof String)) {
+                            continue;
+                        }
+                        propertyValue.setValue(resolvePlaceholder((String) value, properties));
                     }
-                    propertyValue.setValue(resolvePlaceholder((String) value, properties));
+                    // 向容器中注入 字符串解析器，以解析@Value注解
+                    // 一个配置文件 一个 解析器
+                    beanFactory.addEmbeddedValueResolver(location, new PlaceholderResolvingStringValueResolver(properties));
                 }
-                // 向容器中注入 字符串解析器，以解析@Value注解
-                // 一个配置文件 一个 解析器
-                beanFactory.addEmbeddedValueResolver(new PlaceholderResolvingStringValueResolver(properties));
+            } catch (IOException e) {
+                throw new RuntimeException("没有找到配置文件：" + location);
             }
-        } catch (IOException e) {
-            throw new RuntimeException("没有找到配置文件：" + location);
         }
     }
 
@@ -82,8 +87,11 @@ public class PropertyPlaceholderConfigurer implements BeanFactoryPostProcessor {
         return sb.toString();
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void addLocation(String location) {
+        locations.add(location);
+    }
+    public void addLocation(Set<String> locations) {
+        this.locations.addAll(locations);
     }
 
 

@@ -12,6 +12,7 @@ import com.fzdkx.spring.aop.framework.ProxyFactory;
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.BeanFactory;
 import com.fzdkx.spring.beans.factory.BeanFactoryAware;
+import com.fzdkx.spring.beans.factory.ConfigurableListableBeanFactory;
 import com.fzdkx.spring.beans.factory.FactoryBean;
 import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 import com.fzdkx.spring.beans.factory.config.InstantiationAwareBeanPostProcessor;
@@ -34,7 +35,7 @@ public class DefaultAdvisorAutoProxyCreator extends InstantiationAwareBeanPostPr
 
     public static final String DEFAULT_NAME = "defaultAdvisorAutoProxyCreator";
 
-    private DefaultListableBeanFactory beanFactory;
+    private ConfigurableListableBeanFactory beanFactory;
 
     // advisor 集合
     private volatile Set<AspectInfo> advisors;
@@ -131,6 +132,9 @@ public class DefaultAdvisorAutoProxyCreator extends InstantiationAwareBeanPostPr
 
     // 尝试返回代理对象
     public Object wrapIfNecessary(Object bean, BeanDefinition bd) {
+        if (advisors == null){
+            return bean;
+        }
         Object result = bean;
         boolean flag = false;
         // 如果被拦截，进行代理

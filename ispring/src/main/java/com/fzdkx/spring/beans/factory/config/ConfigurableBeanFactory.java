@@ -24,7 +24,7 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
     void destroySingletons();
 
 
-    void addEmbeddedValueResolver(StringValueResolver valueResolver);
+    void addEmbeddedValueResolver(String location, StringValueResolver valueResolver);
 
     String resolveEmbeddedValue(String value);
 

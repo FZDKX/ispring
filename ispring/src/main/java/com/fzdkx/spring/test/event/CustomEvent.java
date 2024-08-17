@@ -1,5 +1,6 @@
 package com.fzdkx.spring.test.event;
 
+import com.fzdkx.spring.context.annotation.Component;
 import com.fzdkx.spring.context.event.ApplicationContextEvent;
 
 /**

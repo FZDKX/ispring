@@ -2,6 +2,7 @@ package com.fzdkx.spring.test.postprocess;
 
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
+import com.fzdkx.spring.context.annotation.Component;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * @create 2024/8/12
  */
 @Slf4j
+@Component
 public class MyBeanPostProcess implements BeanPostProcessor {
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {

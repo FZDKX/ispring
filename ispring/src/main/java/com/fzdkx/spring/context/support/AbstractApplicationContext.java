@@ -3,6 +3,7 @@ package com.fzdkx.spring.context.support;
 import com.fzdkx.spring.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.ConfigurableListableBeanFactory;
+import com.fzdkx.spring.beans.factory.PropertyPlaceholderConfigurer;
 import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 import com.fzdkx.spring.beans.factory.config.BeanFactoryPostProcessor;
 import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
@@ -15,10 +16,13 @@ import com.fzdkx.spring.context.event.ContextClosedEvent;
 import com.fzdkx.spring.context.event.ContextRefreshedEvent;
 import com.fzdkx.spring.context.event.SimpleApplicationEventMulticaster;
 import com.fzdkx.spring.core.convert.ConversionService;
+import com.fzdkx.spring.core.convert.support.ConversionServiceFactoryBean;
 import com.fzdkx.spring.core.io.DefaultResourceLoader;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author 发着呆看星
@@ -26,6 +30,7 @@ import java.util.Map;
  * 抽象的应用上下文，实现了ConfigurableApplicationContext，定义容器刷新步骤，模板方法
  */
 public abstract class AbstractApplicationContext extends DefaultResourceLoader implements ConfigurableApplicationContext {
+
     public static final String APPLICATION_EVENT_MULTICASTER_BEAN_NAME = "applicationEventMulticaster";
 
     // 持有事件广播器
@@ -97,16 +102,20 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader i
     // 执行所有BeanFactoryPostProcess的方法
     private void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
         // 提前实例化类型转换器
-        Object conversionService = beanFactory.getBean("conversionService");
+        Object conversionService = beanFactory.getBean(ConversionServiceFactoryBean.BEAN_NAME);
         if (conversionService instanceof ConversionService) {
             beanFactory.setConversionService((ConversionService) conversionService);
         }
         // 获取所有的 BeanFactoryPostProcess
         Map<String, BeanFactoryPostProcessor> map = beanFactory.getBeansOfType(BeanFactoryPostProcessor.class);
         // 遍历这些 BeanFactoryPostProcess，执行方法
-        for (BeanFactoryPostProcessor beanFactoryPostProcess : map.values()) {
+        for (BeanFactoryPostProcessor bfpp : map.values()) {
+            if (bfpp instanceof PropertyPlaceholderConfigurer){
+                Set<String> locations = beanFactory.getLocations();
+                ((PropertyPlaceholderConfigurer) bfpp).addLocation(locations);
+            }
             // 传入BeanFactory，可以修改BeanDefinition
-            beanFactoryPostProcess.postProcessBeanFactory(beanFactory);
+            bfpp.postProcessBeanFactory(beanFactory);
         }
     }
 

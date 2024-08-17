@@ -2,16 +2,15 @@ package com.fzdkx.spring.beans.factory.support;
 
 import com.fzdkx.spring.beans.exception.BeanInstanceException;
 import com.fzdkx.spring.beans.exception.BeansException;
+import com.fzdkx.spring.beans.exception.NoSuchBeanDefinitionException;
 import com.fzdkx.spring.beans.factory.*;
 import com.fzdkx.spring.beans.factory.config.*;
 import com.fzdkx.spring.core.convert.ConversionService;
 import com.fzdkx.spring.util.BeanUtils;
 import com.fzdkx.spring.util.StringUtils;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
+import java.lang.reflect.*;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -169,6 +168,57 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
     }
 
     private Object createBeanInstance(String name, BeanDefinition bd) {
+        // 如果是
+        Object bean;
+        // @Bean方法创建
+        if (bd.isMethodCreate()) {
+            bean = createBeanInstanceByMethod(name, bd);
+        }
+        // 构造方法创建
+        else {
+            bean = createBeanInstanceByConstructor(name, bd);
+        }
+        return bean;
+    }
+
+    private Object createBeanInstanceByMethod(String name, BeanDefinition bd) {
+        Method method = bd.getCreateMethod();
+        if (method == null) {
+            throw new BeansException("bean创建错误");
+        }
+        // 获取所有的属性
+        Class<?>[] parameterTypes = method.getParameterTypes();
+        int n = parameterTypes.length;
+        Object[] args = new Object[n];
+        for (int i = 0; i < n; i++) {
+            Class<?> type = parameterTypes[i];
+            List<BeanDefinition> bds = getBeanDefinitionByType(type);
+            // 容器中没有该Bean的定义
+            if (BeanUtils.isEmpty(bds)) {
+                throw new NoSuchBeanDefinitionException("找不到bean：" + type);
+            }
+            // 只有一个，那么就使用这个
+            else if (bds.size() == 1) {
+                args[i] = getBean(bds.get(0).getName());
+            }
+            // 有多个，根据参数名称选择
+            else {
+                // 获取参数名
+                String paramName = type.getName();
+                args[i] = getBean(paramName);
+            }
+        }
+        // 如果全部获取成功，进行方法调用
+        Object configuration = getBean(bd.getConfigurationName());
+        try {
+            return method.invoke(configuration, args);
+        } catch (IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Object createBeanInstanceByConstructor(String name, BeanDefinition bd) {
+
         Constructor<?> constructor = null;
         Class<?> beanClass = bd.getBeanClass();
         // 获取所有构造方法

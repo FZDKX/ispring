@@ -42,7 +42,7 @@ public class ClassUtils {
             HashSet<Class<?>> set = new HashSet<>();
             // 获取指定路径下所有的类
             Set<Class<?>> classSet = getClassesInPackage(basePackage);
-            // 获取含有 Component注解的类
+            // 获取含有Component注解的类
             for (Class<?> clazz : classSet) {
                 Annotation component = AnnotationUtils.getAnnotation(clazz, annotation);
                 // 如果有，加入

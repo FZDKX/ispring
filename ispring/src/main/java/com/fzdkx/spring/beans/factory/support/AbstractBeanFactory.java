@@ -13,8 +13,8 @@ import com.fzdkx.spring.util.BeanFactoryUtil;
 import com.fzdkx.spring.util.ClassUtils;
 import com.fzdkx.spring.util.StringValueResolver;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author 发着呆看星
@@ -26,11 +26,14 @@ import java.util.List;
  */
 public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport implements ConfigurableBeanFactory {
 
+    // 配置文件
+    private final Set<String> locations = new HashSet<>();
+
     private final List<BeanPostProcessor> beanPostProcessors = new ArrayList<>();
 
     private volatile boolean hasInstantiationAwareBeanPostProcessors;
 
-    private final List<StringValueResolver> embeddedValueResolvers = new ArrayList<>();
+    private final Map<String, StringValueResolver> embeddedValueResolvers = new ConcurrentHashMap<>();
 
     private ClassLoader beanClassLoader = ClassUtils.getDefaultClassLoader();
 
@@ -198,17 +201,17 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
     }
 
     @Override
-    public void addEmbeddedValueResolver(StringValueResolver valueResolver) {
-        this.embeddedValueResolvers.add(valueResolver);
+    public void addEmbeddedValueResolver(String location, StringValueResolver valueResolver) {
+        this.embeddedValueResolvers.putIfAbsent(location, valueResolver);
     }
 
     @Override
     public String resolveEmbeddedValue(String value) {
         String result = value;
         // 获取所有的解析器，一个配置文件一个解析器
-        for (StringValueResolver resolver : this.embeddedValueResolvers) {
+        for (Map.Entry<String, StringValueResolver> entry : this.embeddedValueResolvers.entrySet()) {
             // 如果配置文件中有对应的 key-value，那么替换，如果没有，原样返回
-            result = resolver.resolveStringValue(result);
+            result = entry.getValue().resolveStringValue(result);
         }
         return result;
     }
@@ -238,9 +241,11 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
         return this.hasInstantiationAwareBeanPostProcessors;
     }
 
-    public List<StringValueResolver> getEmbeddedValueResolvers() {
+    public Map<String, StringValueResolver> getEmbeddedValueResolvers() {
         return embeddedValueResolvers;
     }
 
-
+    public Set<String> getLocations() {
+        return locations;
+    }
 }

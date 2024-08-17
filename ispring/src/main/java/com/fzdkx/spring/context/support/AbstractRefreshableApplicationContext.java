@@ -1,6 +1,7 @@
 package com.fzdkx.spring.context.support;
 
 import com.fzdkx.spring.beans.exception.BeansException;
+import com.fzdkx.spring.beans.factory.PropertyPlaceholderConfigurer;
 import com.fzdkx.spring.beans.factory.config.BeanDefinition;
 import com.fzdkx.spring.beans.factory.support.DefaultListableBeanFactory;
 import com.fzdkx.spring.core.convert.support.ConversionServiceFactoryBean;
@@ -18,8 +19,14 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
         DefaultListableBeanFactory beanFactory = createBeanFactory();
         loadBeanDefinitions(beanFactory);
         this.beanFactory = beanFactory;
-        // 注册类型转换器
-        registerBeanDefinition("conversionService", new BeanDefinition(ConversionServiceFactoryBean.class));
+        // 注册系统的BeanDefinition
+        registerSystemBeanDefinition();
+
+    }
+
+    private void registerSystemBeanDefinition() {
+        registerBeanDefinition(ConversionServiceFactoryBean.BEAN_NAME, new BeanDefinition(ConversionServiceFactoryBean.class));
+        registerBeanDefinition(new BeanDefinition(PropertyPlaceholderConfigurer.class));
     }
 
     // 将加载BeanDefinitions的功能下放，交给子类实现，可能是基于XML获取，也可能是基于注解获取

@@ -9,6 +9,7 @@ import com.fzdkx.spring.beans.factory.support.BeanDefinitionRegistry;
 import com.fzdkx.spring.context.annotation.ClassPathBeanDefinitionScanner;
 import com.fzdkx.spring.core.io.Resource;
 import com.fzdkx.spring.core.io.ResourceLoader;
+import com.fzdkx.spring.util.BeanUtils;
 import com.fzdkx.spring.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.dom4j.Attribute;
@@ -19,8 +20,7 @@ import org.dom4j.io.SAXReader;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 发着呆看星
@@ -39,39 +39,45 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
 
     @Override
-    public void loadBeanDefinitions(Resource resource) throws BeansException {
+    public Set<String> loadBeanDefinitions(Resource resource) throws BeansException {
         try {
             // 加载资源
             InputStream in = resource.getInputStream();
             // 真正解析文件
-            doLoadBeanDefinition(in);
+            return doLoadBeanDefinition(in);
         } catch (IOException e) {
             throw new RuntimeException("XML文档解析失败");
         }
     }
 
     @Override
-    public void loadBeanDefinitions(String location) throws BeanDefinitionStoreException {
+    public Set<String> loadBeanDefinitions(String location) throws BeanDefinitionStoreException {
+        Set<String> set = new HashSet<>();
         ResourceLoader resourceLoader = getResourceLoader();
         Resource resource = resourceLoader.getResource(location);
         loadBeanDefinitions(resource);
+        return set;
     }
 
     @Override
-    public void loadBeanDefinitions(Resource... resources) throws BeansException {
+    public Set<String> loadBeanDefinitions(Resource... resources) throws BeansException {
+        Set<String> result = new HashSet<>();
         for (Resource resource : resources) {
-            loadBeanDefinitions(resource);
+            result.addAll(loadBeanDefinitions(resource));
         }
+        return result;
     }
 
     @Override
-    public void loadBeanDefinitions(String... locations) throws BeansException {
+    public Set<String> loadBeanDefinitions(String... locations) throws BeansException {
+        Set<String> propertiesSource = new HashSet<>();
         for (String location : locations) {
-            loadBeanDefinitions(location);
+            propertiesSource.addAll(loadBeanDefinitions(location));
         }
+        return propertiesSource;
     }
 
-    private void doLoadBeanDefinition(InputStream in) {
+    private Set<String> doLoadBeanDefinition(InputStream in) {
         // 1. 根据XML文件创建 DOM4J树
         SAXReader reader = new SAXReader();
         Document document;
@@ -84,12 +90,16 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         // 2. 获取DOM4J树的根节点 beans
         Element root = document.getRootElement();
 
-        // 3. 解析包扫描
+        // 3. 加载properties-source
+        Set<String> result = propertiesSourceHandle(root);
+
+        // 4. 解析包扫描
         componentScanHandle(root);
-        // 4. 获取根节点的子节点 bean
+
+        // 5. 获取根节点的子节点 bean
         List<Element> beanList = root.elements("bean");
 
-        // 5. 对bean的属性和子元素进行解析
+        // 6. 对bean的属性和子元素进行解析
         for (Element bean : beanList) {
             // 对Bean进行操作
             // 1：对属性进行处理
@@ -106,6 +116,23 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
             }
             getRegistry().registerBeanDefinition(beanDefinition.getName(), beanDefinition);
         }
+        return result;
+    }
+
+    private Set<String> propertiesSourceHandle(Element root) {
+        List<Element> elements = root.elements("properties-source");
+        HashSet<String> result = new HashSet<>();
+        if (BeanUtils.isEmpty(elements)) {
+            return result;
+        }
+        for (Element element : elements) {
+            Attribute attribute = element.attribute("locations");
+            if (attribute != null) {
+                String[] values = attribute.getValue().split(",");
+                result.addAll(Arrays.asList(values));
+            }
+        }
+        return result;
     }
 
     private void componentScanHandle(Element root) {

@@ -1,6 +1,7 @@
 package com.fzdkx.spring.test.event;
 
 import com.fzdkx.spring.context.ApplicationListener;
+import com.fzdkx.spring.context.annotation.Component;
 import com.fzdkx.spring.context.event.ContextClosedEvent;
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * @create 2024/8/13
  */
 @Slf4j
+@Component
 public class ContextClosedEventListener  implements ApplicationListener<ContextClosedEvent> {
     @Override
     public void onApplicationEvent(ContextClosedEvent event) {

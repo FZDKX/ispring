@@ -12,6 +12,9 @@ import java.util.Set;
  * 工厂bean，创建DefaultConversionService
  */
 public class ConversionServiceFactoryBean implements FactoryBean<ConversionService>, InitializingBean {
+
+    public static final String BEAN_NAME = "conversionService";
+
     private Set<?> converters;
 
     private GenericConversionService conversionService;

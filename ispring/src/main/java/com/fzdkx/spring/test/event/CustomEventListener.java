@@ -1,6 +1,7 @@
 package com.fzdkx.spring.test.event;
 
 import com.fzdkx.spring.context.ApplicationListener;
+import com.fzdkx.spring.context.annotation.Component;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * 自定义事件 监听器
  */
 @Slf4j
+@Component
 public class CustomEventListener implements ApplicationListener<CustomEvent> {
     @Override
     public void onApplicationEvent(CustomEvent event) {

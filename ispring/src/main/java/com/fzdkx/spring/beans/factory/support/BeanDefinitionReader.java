@@ -4,6 +4,7 @@ import com.fzdkx.spring.beans.exception.BeanDefinitionStoreException;
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.core.io.Resource;
 import com.fzdkx.spring.core.io.ResourceLoader;
+import java.util.Set;
 
 /**
  * @author 发着呆看星
@@ -18,11 +19,11 @@ public interface BeanDefinitionReader {
     ResourceLoader getResourceLoader();
 
     // 加载BeanDefinition信息，返回找到的BeanDefinition的数量
-    void loadBeanDefinitions(String location) throws BeanDefinitionStoreException;
+    Set<String> loadBeanDefinitions(String location) throws BeanDefinitionStoreException;
 
-    void loadBeanDefinitions(Resource resource) throws BeansException;
+    Set<String> loadBeanDefinitions(Resource resource) throws BeansException;
 
-    void loadBeanDefinitions(Resource... resources) throws BeansException;
-    void loadBeanDefinitions(String... locations) throws BeansException;
+    Set<String> loadBeanDefinitions(Resource... resources) throws BeansException;
+    Set<String> loadBeanDefinitions(String... locations) throws BeansException;
 
 }
