@@ -1,4 +1,4 @@
-package com.fzdkx.mytest.posprocess;
+package com.fzdkx.mytest.postprocess;
 
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.config.BeanPostProcessor;
