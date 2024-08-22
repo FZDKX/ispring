@@ -139,9 +139,7 @@ public class BeanDefinition {
     }
 
     public ConstructorArgument getConstructorArgument() {
-        if (constructorArgument != null) {
-            return constructorArgument;
-        } else {
+        if (constructorArgument == null) {
             // 为空
             // 判断是否只有一个构造函数
             if (beanClass.getDeclaredConstructors().length == 1) {
@@ -155,8 +153,8 @@ public class BeanDefinition {
                 }
                 this.constructorArgument = argument;
             }
-            return constructorArgument;
         }
+        return constructorArgument;
     }
 
     public void setConstructorArgument(ConstructorArgument constructorArgument) {

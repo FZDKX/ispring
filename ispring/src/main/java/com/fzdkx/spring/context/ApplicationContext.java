@@ -1,6 +1,5 @@
 package com.fzdkx.spring.context;
 
-import com.fzdkx.spring.beans.factory.ConfigurableListableBeanFactory;
 import com.fzdkx.spring.beans.factory.HierarchicalBeanFactory;
 import com.fzdkx.spring.beans.factory.ListableBeanFactory;
 import com.fzdkx.spring.core.io.ResourceLoader;

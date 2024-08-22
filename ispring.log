@@ -1,0 +1,200 @@
+2024-08-10 12:39:06--com.fzdkx.test.Dom4jTest.main(Dom4jTest.java:49)--Dom4jTest.java--DEBUG--1111111
+2024-08-10 12:39:58--com.fzdkx.test.Dom4jTest.main(Dom4jTest.java:49)--Dom4jTest.java--DEBUG--1111111
+1111111
+1111111
+1111111
+1111111
+2024-08-10 12:43:56 -- com.fzdkx.test.Dom4jTest.main(Dom4jTest.java:49) -- Dom4jTest.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:16:18 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:63) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:17:12 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:63) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:26:20 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:27:43 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:28:10 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:29:44 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:30:17 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:31:57 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:32:31 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:35:55 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:36:18 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:36:45 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-11 15:37:38 -- com.fzdkx.spring.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinition(XmlBeanDefinitionReader.java:60) -- XmlBeanDefinitionReader.java -- DEBUG -- BeanDefinition 加载完成
+2024-08-12 14:54:48 -- com.fzdkx.live.MyBean.<init>(MyBean.java:15) -- MyBean.java -- DEBUG -- create myBean
+2024-08-12 14:54:48 -- com.fzdkx.live.MyBean.setBeanFactory(MyBean.java:25) -- MyBean.java -- DEBUG -- myBean get beanFactory：AbstractAutowireCapableBeanFactory(instantiationStrategy=com.fzdkx.spring.beans.factory.support.SimpleInstantiationStrategy@e2d56bf)
+2024-08-12 14:54:48 -- com.fzdkx.live.MyBean.setBeanClassLoader(MyBean.java:20) -- MyBean.java -- DEBUG -- myBean get classLoader：sun.misc.Launcher$AppClassLoader@18b4aac2
+2024-08-12 14:54:48 -- com.fzdkx.live.MyBean.setBeanName(MyBean.java:30) -- MyBean.java -- DEBUG -- myBean get beanName：myBean
+2024-08-12 14:54:48 -- com.fzdkx.live.MyBean.afterPropertiesSet(MyBean.java:40) -- MyBean.java -- DEBUG -- myBean 系统 init
+2024-08-12 14:54:48 -- com.fzdkx.live.MyBean.sayHello(MyBean.java:45) -- MyBean.java -- DEBUG -- myBean 自定义 init
+2024-08-12 14:54:48 -- com.fzdkx.live.MyBean.destroy(MyBean.java:35) -- MyBean.java -- DEBUG -- myBean 系统 destroy
+2024-08-12 14:54:48 -- com.fzdkx.live.MyBean.sayBye(MyBean.java:50) -- MyBean.java -- DEBUG -- myBean 自定义 destroy
+2024-08-12 14:58:43 -- com.fzdkx.postprocess.MyBeanPostProcess.postProcessBeforeInitialization(MyBeanPostProcess.java:15) -- MyBeanPostProcess.java -- DEBUG -- person   before
+2024-08-12 14:58:43 -- com.fzdkx.xhyl.Person.sayHello(Person.java:40) -- Person.java -- DEBUG -- person -- 自定义的初始化方法
+2024-08-12 14:58:43 -- com.fzdkx.postprocess.MyBeanPostProcess.postProcessAfterInitialization(MyBeanPostProcess.java:21) -- MyBeanPostProcess.java -- DEBUG -- person   after
+2024-08-12 14:58:43 -- com.fzdkx.postprocess.MyBeanPostProcess.postProcessBeforeInitialization(MyBeanPostProcess.java:15) -- MyBeanPostProcess.java -- DEBUG -- cat   before
+2024-08-12 14:58:43 -- com.fzdkx.xhyl.Cat.afterPropertiesSet(Cat.java:47) -- Cat.java -- DEBUG -- cat -- 接口的初始化方法
+2024-08-12 14:58:43 -- com.fzdkx.postprocess.MyBeanPostProcess.postProcessAfterInitialization(MyBeanPostProcess.java:21) -- MyBeanPostProcess.java -- DEBUG -- cat   after
+2024-08-12 14:58:43 -- com.fzdkx.live.MyBean.<init>(MyBean.java:15) -- MyBean.java -- DEBUG -- create myBean
+2024-08-12 14:58:43 -- com.fzdkx.live.MyBean.setBeanFactory(MyBean.java:25) -- MyBean.java -- DEBUG -- myBean get beanFactory：AbstractAutowireCapableBeanFactory(instantiationStrategy=com.fzdkx.spring.beans.factory.support.SimpleInstantiationStrategy@e2d56bf)
+2024-08-12 14:58:43 -- com.fzdkx.live.MyBean.setBeanClassLoader(MyBean.java:20) -- MyBean.java -- DEBUG -- myBean get classLoader：sun.misc.Launcher$AppClassLoader@18b4aac2
+2024-08-12 14:58:43 -- com.fzdkx.live.MyBean.setBeanName(MyBean.java:30) -- MyBean.java -- DEBUG -- myBean get beanName：myBean
+2024-08-12 14:58:43 -- com.fzdkx.postprocess.MyBeanPostProcess.postProcessBeforeInitialization(MyBeanPostProcess.java:15) -- MyBeanPostProcess.java -- DEBUG -- myBean   before
+2024-08-12 14:58:43 -- com.fzdkx.live.MyBean.afterPropertiesSet(MyBean.java:40) -- MyBean.java -- DEBUG -- myBean 系统 init
+2024-08-12 14:58:43 -- com.fzdkx.live.MyBean.sayHello(MyBean.java:45) -- MyBean.java -- DEBUG -- myBean 自定义 init
+2024-08-12 14:58:43 -- com.fzdkx.postprocess.MyBeanPostProcess.postProcessAfterInitialization(MyBeanPostProcess.java:21) -- MyBeanPostProcess.java -- DEBUG -- myBean   after
+2024-08-12 14:58:43 -- com.fzdkx.xhyl.Cat.destroy(Cat.java:42) -- Cat.java -- DEBUG -- cat -- 接口的销毁方法
+2024-08-12 14:58:43 -- com.fzdkx.xhyl.Person.sayBye(Person.java:44) -- Person.java -- DEBUG -- person -- 自定义的销毁方法
+2024-08-12 14:58:43 -- com.fzdkx.live.MyBean.destroy(MyBean.java:35) -- MyBean.java -- DEBUG -- myBean 系统 destroy
+2024-08-12 14:58:43 -- com.fzdkx.live.MyBean.sayBye(MyBean.java:50) -- MyBean.java -- DEBUG -- myBean 自定义 destroy
+2024-08-12 15:00:03 -- person   before
+2024-08-12 15:00:03 -- person -- 自定义的初始化方法
+2024-08-12 15:00:03 -- person   after
+2024-08-12 15:00:03 -- cat   before
+2024-08-12 15:00:03 -- cat -- 接口的初始化方法
+2024-08-12 15:00:03 -- cat   after
+2024-08-12 15:00:03 -- create myBean
+2024-08-12 15:00:03 -- myBean get beanFactory：AbstractAutowireCapableBeanFactory(instantiationStrategy=com.fzdkx.spring.beans.factory.support.SimpleInstantiationStrategy@200a570f)
+2024-08-12 15:00:03 -- myBean get classLoader：sun.misc.Launcher$AppClassLoader@18b4aac2
+2024-08-12 15:00:03 -- myBean get beanName：myBean
+2024-08-12 15:00:03 -- myBean   before
+2024-08-12 15:00:03 -- myBean 系统 init
+2024-08-12 15:00:03 -- myBean 自定义 init
+2024-08-12 15:00:03 -- myBean   after
+2024-08-12 15:00:03 -- cat -- 接口的销毁方法
+2024-08-12 15:00:03 -- person -- 自定义的销毁方法
+2024-08-12 15:00:03 -- myBean 系统 destroy
+2024-08-12 15:00:03 -- myBean 自定义 destroy
+2024-08-12 17:41:01 -- person   before
+2024-08-12 17:41:01 -- person -- 自定义的初始化方法
+2024-08-12 17:41:01 -- person   after
+2024-08-12 17:41:01 -- cat   before
+2024-08-12 17:41:01 -- cat -- 接口的初始化方法
+2024-08-12 17:41:01 -- cat   after
+2024-08-12 17:41:01 -- myBean   before
+2024-08-12 17:41:01 -- myBean   after
+2024-08-12 17:41:01 -- cat -- 接口的销毁方法
+2024-08-12 17:41:01 -- person -- 自定义的销毁方法
+2024-08-12 17:41:35 -- person   before
+2024-08-12 17:41:35 -- person -- 自定义的初始化方法
+2024-08-12 17:41:35 -- person   after
+2024-08-12 17:41:35 -- cat   before
+2024-08-12 17:41:35 -- cat -- 接口的初始化方法
+2024-08-12 17:41:35 -- cat   after
+2024-08-12 17:41:35 -- myBean   before
+2024-08-12 17:41:35 -- myBean   after
+2024-08-12 17:41:35 -- create myBean
+2024-08-12 17:41:35 -- cat -- 接口的销毁方法
+2024-08-12 17:41:35 -- person -- 自定义的销毁方法
+2024-08-12 17:42:35 -- person   before
+2024-08-12 17:42:35 -- person -- 自定义的初始化方法
+2024-08-12 17:42:35 -- person   after
+2024-08-12 17:42:35 -- cat   before
+2024-08-12 17:42:35 -- cat -- 接口的初始化方法
+2024-08-12 17:42:35 -- cat   after
+2024-08-12 17:42:35 -- myBean   before
+2024-08-12 17:42:35 -- myBean   after
+2024-08-12 17:42:35 -- ==============
+2024-08-12 17:42:35 -- getObject 被调用
+2024-08-12 17:42:35 -- create myBean
+2024-08-12 17:42:35 -- cat -- 接口的销毁方法
+2024-08-12 17:42:35 -- person -- 自定义的销毁方法
+2024-08-12 17:43:32 -- person   before
+2024-08-12 17:43:32 -- person -- 自定义的初始化方法
+2024-08-12 17:43:32 -- person   after
+2024-08-12 17:43:32 -- cat   before
+2024-08-12 17:43:32 -- cat -- 接口的初始化方法
+2024-08-12 17:43:32 -- cat   after
+2024-08-12 17:43:32 -- myBean   before
+2024-08-12 17:43:32 -- myBean   after
+2024-08-12 17:43:32 -- ==============
+2024-08-12 17:43:32 -- getObject 被调用
+2024-08-12 17:43:32 -- create myBean
+2024-08-12 17:43:32 -- com.fzdkx.live.MyBean@59f95c5d
+2024-08-12 17:43:32 -- cat -- 接口的销毁方法
+2024-08-12 17:43:32 -- person -- 自定义的销毁方法
+2024-08-13 10:46:00 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5680a178]
+2024-08-13 10:46:00 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5680a178 . 消息 -- 剑来
+2024-08-13 10:46:00 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5680a178]
+2024-08-13 10:58:16 -- getObject 被调用
+2024-08-13 10:58:16 -- create myBean
+2024-08-13 10:58:16 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a]
+2024-08-13 10:58:16 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a . 消息 -- 剑来
+2024-08-13 10:58:16 -- ==============
+2024-08-13 10:58:16 -- com.fzdkx.live.MyBean@7960847b
+2024-08-13 10:58:16 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a]
+2024-08-13 10:59:17 -- getObject 被调用
+2024-08-13 10:59:17 -- create myBean
+2024-08-13 10:59:17 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a]
+2024-08-13 10:59:17 -- ==============
+2024-08-13 10:59:17 -- com.fzdkx.live.MyBean@7960847b
+2024-08-13 10:59:17 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a]
+2024-08-13 11:01:11 -- getObject 被调用
+2024-08-13 11:01:11 -- create myBean
+2024-08-13 11:01:11 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a]
+2024-08-13 11:01:11 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a . 消息 -- 剑来
+2024-08-13 11:01:11 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a]
+2024-08-13 11:02:27 -- getObject 被调用
+2024-08-13 11:02:27 -- create myBean
+2024-08-13 11:03:06 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@3b94d659]
+2024-08-13 11:03:06 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@3b94d659 . 消息 -- 剑来
+2024-08-13 11:03:06 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@3b94d659]
+2024-08-13 11:03:48 -- getObject 被调用
+2024-08-13 11:03:48 -- create myBean
+2024-08-13 11:03:48 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5123a213]
+2024-08-13 11:03:48 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5123a213 . 消息 -- 剑来
+2024-08-13 11:03:48 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5123a213]
+2024-08-13 11:05:40 -- getObject 被调用
+2024-08-13 11:05:40 -- create myBean
+2024-08-13 11:05:40 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@17211155]
+2024-08-13 11:05:40 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@17211155 . 消息 -- 剑来
+2024-08-13 11:05:40 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@17211155]
+2024-08-13 11:05:58 -- getObject 被调用
+2024-08-13 11:05:58 -- create myBean
+2024-08-13 11:05:58 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5123a213]
+2024-08-13 11:05:58 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5123a213 . 消息 -- 剑来
+2024-08-13 11:05:58 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5123a213]
+2024-08-13 11:06:13 -- getObject 被调用
+2024-08-13 11:06:13 -- create myBean
+2024-08-13 11:06:13 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5123a213]
+2024-08-13 11:06:13 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5123a213 . 消息 -- 剑来
+2024-08-13 11:06:13 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5123a213]
+2024-08-13 11:06:28 -- getObject 被调用
+2024-08-13 11:06:28 -- create myBean
+2024-08-13 11:06:47 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@3b94d659]
+2024-08-13 11:06:47 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@3b94d659 . 消息 -- 剑来
+2024-08-13 11:06:47 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@3b94d659]
+2024-08-13 11:10:02 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@7a36aefa]
+2024-08-13 11:10:02 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@7a36aefa . 消息 -- 剑来
+2024-08-13 11:10:02 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@7a36aefa]
+2024-08-13 11:10:16 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a]
+2024-08-13 11:10:16 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a . 消息 -- 剑来
+2024-08-13 11:10:16 -- ==============
+2024-08-13 11:10:16 -- getObject 被调用
+2024-08-13 11:10:16 -- create myBean
+2024-08-13 11:10:16 -- com.fzdkx.live.MyBean@7960847b
+2024-08-13 11:10:16 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a]
+2024-08-13 11:10:40 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a]
+2024-08-13 11:10:40 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a . 消息 -- 剑来
+2024-08-13 11:10:40 -- ==============
+2024-08-13 11:10:40 -- getObject 被调用
+2024-08-13 11:10:40 -- create myBean
+2024-08-13 11:10:40 -- com.fzdkx.live.MyBean@7960847b
+2024-08-13 11:10:40 -- ==============
+2024-08-13 11:10:40 -- com.fzdkx.live.MyBean@7960847b
+2024-08-13 11:10:40 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@5fdef03a]
+2024-08-13 14:25:38 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@4aa8f0b4]
+2024-08-13 14:25:38 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@4aa8f0b4 . 消息 -- 剑来
+2024-08-13 14:25:38 -- ==============
+2024-08-13 14:25:38 -- getObject 被调用
+2024-08-13 14:25:38 -- create myBean
+2024-08-13 14:25:38 -- com.fzdkx.live.MyBean@3b192d32
+2024-08-13 14:25:38 -- ==============
+2024-08-13 14:25:38 -- com.fzdkx.live.MyBean@3b192d32
+2024-08-13 14:25:38 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@4aa8f0b4]
+2024-08-13 14:34:21 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@4aa8f0b4]
+2024-08-13 14:34:21 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@4aa8f0b4 . 消息 -- 剑来
+2024-08-13 14:34:21 -- ==============
+2024-08-13 14:34:21 -- getObject 被调用
+2024-08-13 14:34:21 -- create myBean
+2024-08-13 14:34:21 -- com.fzdkx.live.MyBean@3b192d32
+2024-08-13 14:34:21 -- ==============
+2024-08-13 14:34:21 -- com.fzdkx.live.MyBean@3b192d32
+2024-08-13 14:34:21 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.ClassPathXmlApplicationContext@4aa8f0b4]

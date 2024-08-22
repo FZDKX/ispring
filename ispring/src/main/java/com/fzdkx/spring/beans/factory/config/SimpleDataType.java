@@ -8,12 +8,14 @@ import com.fzdkx.spring.beans.exception.BeanInstanceException;
  */
 public class SimpleDataType {
 
+    static final Class<?>[] simpleType = new Class[]{
+            Byte.class, Short.class, Integer.class, Long.class,
+            Float.class, Double.class, Boolean.class, Character.class
+    };
+
     // 定义基本数据类型数组
     public static Class<?>[] getSimpleDataType() {
-        return new Class[]{
-                Byte.class, Short.class, Integer.class, Long.class,
-                Float.class, Double.class, Boolean.class, Character.class
-        };
+        return simpleType;
     }
 
     public static <T> T parseNumber(String value, Class<T> clazz) {
@@ -41,4 +43,13 @@ public class SimpleDataType {
         throw new BeanInstanceException("转换异常");
     }
 
+    // 判断是为简单类型
+    public static boolean isSimpleType(Class<?> clazz){
+        for (Class<?> aClass : simpleType) {
+            if (aClass == clazz){
+                return true;
+            }
+        }
+        return false;
+    }
 }

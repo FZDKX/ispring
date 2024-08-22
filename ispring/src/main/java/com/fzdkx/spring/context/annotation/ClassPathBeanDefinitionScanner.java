@@ -2,16 +2,15 @@ package com.fzdkx.spring.context.annotation;
 
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.ConfigurableListableBeanFactory;
-import com.fzdkx.spring.beans.factory.config.BeanDefinition;
-import com.fzdkx.spring.beans.factory.config.ConfigurableBeanFactory;
+import com.fzdkx.spring.beans.factory.config.*;
 import com.fzdkx.spring.beans.factory.support.BeanDefinitionRegistry;
-import com.fzdkx.spring.beans.factory.support.DefaultListableBeanFactory;
 import com.fzdkx.spring.util.AnnotationUtils;
 import com.fzdkx.spring.util.StringUtils;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -56,13 +55,49 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
         String scope = parseScope(clazz);
         // 解析 lazy
         boolean isLazy = parseLazy(clazz);
+        // 解析构造方法
+        ConstructorArgument argument = parseAutowired(clazz);
         beanDefinition.setName(beanName);
         beanDefinition.setScope(scope);
         beanDefinition.setLazyInit(isLazy);
+        beanDefinition.setConstructorArgument(argument);
         // 注册BeanDefinition
         registry.registerBeanDefinition(beanName, beanDefinition);
         // 如果有 PropertiesSource
         addProperties(clazz);
+    }
+
+    private ConstructorArgument parseAutowired(Class<?> clazz) {
+        ConstructorArgument argument = new ConstructorArgument();
+        // 获取所有的构造方法
+        Constructor<?>[] constructors = clazz.getDeclaredConstructors();
+        for (Constructor<?> constructor : constructors) {
+            Autowired autowired = constructor.getAnnotation(Autowired.class);
+            // 如果构造方法被上@Autowired
+            if (autowired != null) {
+                // 给argument赋值
+                Class<?>[] types = constructor.getParameterTypes();
+                Parameter[] parameters = constructor.getParameters();
+                int n = types.length;
+                for (int i = 0; i < n; i++) {
+                    Class<?> type = types[i];
+                    String parameter = parameters[i].getName();
+                    ConstructorArgument.ValueHolder holder = new ConstructorArgument.ValueHolder();
+                    holder.setType(type);
+                    // 不为基础类型，Bean
+                    if (!SimpleDataType.isSimpleType(type)) {
+                        holder.setValue((BeanReference) () -> parameter);
+                    } else {
+                        // 是基础类型
+                        holder.setValue(parameter);
+                    }
+                    argument.setValueHolder(i, holder);
+                }
+                // 直接退出
+                return argument;
+            }
+        }
+        return null;
     }
 
     private boolean parseLazy(Class<?> clazz) {
@@ -191,7 +226,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
             // destroyMethod
             String destroyMethod = bean.destroyMethod();
             if (!StringUtils.isEmpty(destroyMethod)) {
-                bd.setInitMethodName(destroyMethod);
+                bd.setDestroyMethodName(destroyMethod);
             }
             // 设置为方法创建，并设置创建方法
             bd.setMethodCreate(true);
@@ -202,7 +237,7 @@ public class ClassPathBeanDefinitionScanner extends ClassPathScanningCandidateCo
         }
     }
 
-    public void addProperties(Class<?> clazz){
+    public void addProperties(Class<?> clazz) {
         // 如果有 PropertiesSource
         PropertiesSource propertiesSource = clazz.getAnnotation(PropertiesSource.class);
         if (propertiesSource != null) {

@@ -1,0 +1,648 @@
+2024-08-17 21:32:52 -- contextRefreshedEventListener   before
+2024-08-17 21:32:52 -- contextRefreshedEventListener   after
+2024-08-17 21:32:52 -- customEventListener   before
+2024-08-17 21:32:52 -- customEventListener   after
+2024-08-17 21:32:52 -- contextClosedEventListener   before
+2024-08-17 21:32:52 -- contextClosedEventListener   after
+2024-08-17 21:32:52 -- myAopTest1   before
+2024-08-17 21:32:52 -- myAopTest1   after
+2024-08-17 21:34:44 -- contextRefreshedEventListener   before
+2024-08-17 21:34:44 -- contextRefreshedEventListener   after
+2024-08-17 21:34:44 -- customEventListener   before
+2024-08-17 21:34:44 -- customEventListener   after
+2024-08-17 21:34:44 -- contextClosedEventListener   before
+2024-08-17 21:34:44 -- contextClosedEventListener   after
+2024-08-17 21:34:44 -- myAopTest1   before
+2024-08-17 21:34:44 -- myAopTest1   after
+2024-08-17 21:37:04 -- contextRefreshedEventListener   before
+2024-08-17 21:37:04 -- contextRefreshedEventListener   after
+2024-08-17 21:37:04 -- customEventListener   before
+2024-08-17 21:37:04 -- customEventListener   after
+2024-08-17 21:37:04 -- contextClosedEventListener   before
+2024-08-17 21:37:04 -- contextClosedEventListener   after
+2024-08-17 21:37:04 -- myAopTest1   before
+2024-08-17 21:37:04 -- myAopTest1   after
+2024-08-17 21:37:58 -- contextRefreshedEventListener   before
+2024-08-17 21:37:58 -- contextRefreshedEventListener   after
+2024-08-17 21:37:58 -- customEventListener   before
+2024-08-17 21:37:58 -- customEventListener   after
+2024-08-17 21:37:58 -- contextClosedEventListener   before
+2024-08-17 21:37:58 -- contextClosedEventListener   after
+2024-08-17 21:37:58 -- myAopTest1   before
+2024-08-17 21:37:58 -- myAopTest1   after
+2024-08-17 21:39:02 -- contextRefreshedEventListener   before
+2024-08-17 21:39:02 -- contextRefreshedEventListener   after
+2024-08-17 21:39:02 -- customEventListener   before
+2024-08-17 21:39:02 -- customEventListener   after
+2024-08-17 21:39:02 -- contextClosedEventListener   before
+2024-08-17 21:39:02 -- contextClosedEventListener   after
+2024-08-17 21:39:02 -- myAopTest1   before
+2024-08-17 21:39:02 -- myAopTest1   after
+2024-08-17 21:39:11 -- contextRefreshedEventListener   before
+2024-08-17 21:39:11 -- contextRefreshedEventListener   after
+2024-08-17 21:39:11 -- customEventListener   before
+2024-08-17 21:39:11 -- customEventListener   after
+2024-08-17 21:39:11 -- contextClosedEventListener   before
+2024-08-17 21:39:11 -- contextClosedEventListener   after
+2024-08-17 21:39:11 -- myAopTest1   before
+2024-08-17 21:39:11 -- myAopTest1   after
+2024-08-17 21:39:57 -- contextRefreshedEventListener   before
+2024-08-17 21:39:57 -- contextRefreshedEventListener   after
+2024-08-17 21:39:57 -- customEventListener   before
+2024-08-17 21:39:57 -- customEventListener   after
+2024-08-17 21:39:57 -- contextClosedEventListener   before
+2024-08-17 21:39:57 -- contextClosedEventListener   after
+2024-08-17 21:39:57 -- myAopTest1   before
+2024-08-17 21:39:57 -- myAopTest1   after
+2024-08-17 21:40:01 -- myAopTest   before
+2024-08-17 21:40:01 -- myAopTest   after
+2024-08-17 21:40:01 -- cat   before
+2024-08-17 21:40:01 -- cat -- 接口的初始化方法
+2024-08-17 21:40:01 -- cat   after
+2024-08-17 21:40:01 -- person   before
+2024-08-17 21:40:01 -- person   after
+2024-08-17 21:40:01 -- myConfiguration   before
+2024-08-17 21:40:01 -- myConfiguration   after
+2024-08-17 21:40:01 -- beanTest   before
+2024-08-17 21:40:01 -- beanTest   after
+2024-08-17 21:40:01 -- userService   before
+2024-08-17 21:40:01 -- userService   after
+2024-08-17 21:40:01 -- myBean   before
+2024-08-17 21:40:01 -- myBean   after
+2024-08-17 21:40:01 -- getObject 被调用
+2024-08-17 21:40:01 -- create myBean
+2024-08-17 21:40:01 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@158d2680]
+2024-08-17 21:40:01 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@158d2680 . 消息 -- 剑来
+2024-08-22 19:55:56 -- contextRefreshedEventListener   before
+2024-08-22 19:55:56 -- contextRefreshedEventListener   after
+2024-08-22 19:55:56 -- customEventListener   before
+2024-08-22 19:55:56 -- customEventListener   after
+2024-08-22 19:55:56 -- contextClosedEventListener   before
+2024-08-22 19:55:56 -- contextClosedEventListener   after
+2024-08-22 19:55:56 -- myAopTest1   before
+2024-08-22 19:55:56 -- myAopTest1   after
+2024-08-22 19:55:57 -- myAopTest   before
+2024-08-22 19:55:57 -- myAopTest   after
+2024-08-22 19:55:57 -- cat   before
+2024-08-22 19:55:57 -- cat -- 接口的初始化方法
+2024-08-22 19:55:57 -- cat   after
+2024-08-22 19:55:57 -- person   before
+2024-08-22 19:55:57 -- person   after
+2024-08-22 19:55:57 -- myConfiguration   before
+2024-08-22 19:55:57 -- myConfiguration   after
+2024-08-22 19:55:57 -- beanTest   before
+2024-08-22 19:55:57 -- beanTest   after
+2024-08-22 19:55:57 -- a   before
+2024-08-22 19:55:57 -- a   after
+2024-08-22 19:55:57 -- userService   before
+2024-08-22 19:55:57 -- userService   after
+2024-08-22 19:55:57 -- b   before
+2024-08-22 19:55:57 -- b   after
+2024-08-22 19:55:57 -- myBean   before
+2024-08-22 19:55:57 -- myBean   after
+2024-08-22 19:55:57 -- getObject 被调用
+2024-08-22 19:55:57 -- create myBean
+2024-08-22 19:55:57 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@7f3b84b8]
+2024-08-22 19:55:57 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@7f3b84b8 . 消息 -- 剑来
+2024-08-22 19:55:57 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 19:55:57 -- 目标方法调用：正在查询用户信息......
+2024-08-22 19:55:57 -- 返回通知，返回值：zs
+2024-08-22 19:55:57 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 19:56:52 -- contextRefreshedEventListener   before
+2024-08-22 19:56:52 -- contextRefreshedEventListener   after
+2024-08-22 19:56:52 -- customEventListener   before
+2024-08-22 19:56:52 -- customEventListener   after
+2024-08-22 19:56:52 -- contextClosedEventListener   before
+2024-08-22 19:56:52 -- contextClosedEventListener   after
+2024-08-22 19:56:52 -- myAopTest1   before
+2024-08-22 19:56:52 -- myAopTest1   after
+2024-08-22 19:56:52 -- myAopTest   before
+2024-08-22 19:56:52 -- myAopTest   after
+2024-08-22 19:56:52 -- cat   before
+2024-08-22 19:56:52 -- cat -- 接口的初始化方法
+2024-08-22 19:56:52 -- cat   after
+2024-08-22 19:56:52 -- person   before
+2024-08-22 19:56:52 -- person   after
+2024-08-22 19:56:52 -- myConfiguration   before
+2024-08-22 19:56:52 -- myConfiguration   after
+2024-08-22 19:56:52 -- beanTest   before
+2024-08-22 19:56:52 -- beanTest   after
+2024-08-22 19:56:52 -- myBean   before
+2024-08-22 19:56:52 -- myBean   after
+2024-08-22 19:56:52 -- getObject 被调用
+2024-08-22 19:56:52 -- create myBean
+2024-08-22 19:56:52 -- b   before
+2024-08-22 19:56:52 -- b   after
+2024-08-22 19:56:52 -- userService   before
+2024-08-22 19:56:52 -- userService   after
+2024-08-22 19:56:52 -- a   before
+2024-08-22 19:56:52 -- a   after
+2024-08-22 19:56:52 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@5f9d02cb]
+2024-08-22 19:56:52 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@5f9d02cb . 消息 -- 剑来
+2024-08-22 19:56:52 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 19:56:52 -- 目标方法调用：正在查询用户信息......
+2024-08-22 19:56:52 -- 返回通知，返回值：zs
+2024-08-22 19:56:52 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 19:57:02 -- contextRefreshedEventListener   before
+2024-08-22 19:57:02 -- contextRefreshedEventListener   after
+2024-08-22 19:57:02 -- customEventListener   before
+2024-08-22 19:57:02 -- customEventListener   after
+2024-08-22 19:57:02 -- contextClosedEventListener   before
+2024-08-22 19:57:02 -- contextClosedEventListener   after
+2024-08-22 19:57:02 -- myAopTest1   before
+2024-08-22 19:57:02 -- myAopTest1   after
+2024-08-22 19:57:02 -- myAopTest   before
+2024-08-22 19:57:02 -- myAopTest   after
+2024-08-22 19:57:02 -- cat   before
+2024-08-22 19:57:02 -- cat -- 接口的初始化方法
+2024-08-22 19:57:02 -- cat   after
+2024-08-22 19:57:02 -- person   before
+2024-08-22 19:57:02 -- person   after
+2024-08-22 19:57:02 -- myConfiguration   before
+2024-08-22 19:57:02 -- myConfiguration   after
+2024-08-22 19:57:02 -- beanTest   before
+2024-08-22 19:57:02 -- beanTest   after
+2024-08-22 19:57:02 -- b   before
+2024-08-22 19:57:02 -- b   after
+2024-08-22 19:57:02 -- myBean   before
+2024-08-22 19:57:02 -- myBean   after
+2024-08-22 19:57:02 -- getObject 被调用
+2024-08-22 19:57:02 -- create myBean
+2024-08-22 19:57:02 -- userService   before
+2024-08-22 19:57:02 -- userService   after
+2024-08-22 19:57:02 -- a   before
+2024-08-22 19:57:02 -- a   after
+2024-08-22 19:57:02 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@49ec71f8]
+2024-08-22 19:57:02 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@49ec71f8 . 消息 -- 剑来
+2024-08-22 19:57:02 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 19:57:02 -- 目标方法调用：正在查询用户信息......
+2024-08-22 19:57:02 -- 返回通知，返回值：zs
+2024-08-22 19:57:02 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 19:57:36 -- contextRefreshedEventListener   before
+2024-08-22 19:57:36 -- contextRefreshedEventListener   after
+2024-08-22 19:57:36 -- customEventListener   before
+2024-08-22 19:57:36 -- customEventListener   after
+2024-08-22 19:57:36 -- contextClosedEventListener   before
+2024-08-22 19:57:36 -- contextClosedEventListener   after
+2024-08-22 19:57:36 -- myAopTest1   before
+2024-08-22 19:57:36 -- myAopTest1   after
+2024-08-22 19:57:36 -- myAopTest   before
+2024-08-22 19:57:36 -- myAopTest   after
+2024-08-22 19:57:36 -- cat   before
+2024-08-22 19:57:36 -- cat -- 接口的初始化方法
+2024-08-22 19:57:36 -- cat   after
+2024-08-22 19:57:36 -- person   before
+2024-08-22 19:57:36 -- person   after
+2024-08-22 19:57:36 -- myConfiguration   before
+2024-08-22 19:57:36 -- myConfiguration   after
+2024-08-22 19:57:36 -- beanTest   before
+2024-08-22 19:57:36 -- beanTest   after
+2024-08-22 19:57:36 -- b   before
+2024-08-22 19:57:36 -- b   after
+2024-08-22 19:57:36 -- myBean   before
+2024-08-22 19:57:36 -- myBean   after
+2024-08-22 19:57:36 -- getObject 被调用
+2024-08-22 19:57:36 -- create myBean
+2024-08-22 19:57:36 -- userService   before
+2024-08-22 19:57:36 -- userService   after
+2024-08-22 19:57:36 -- a   before
+2024-08-22 19:57:36 -- a   after
+2024-08-22 19:57:36 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@49ec71f8]
+2024-08-22 19:57:36 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@49ec71f8 . 消息 -- 剑来
+2024-08-22 19:57:36 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 19:57:36 -- 目标方法调用：正在查询用户信息......
+2024-08-22 19:57:36 -- 返回通知，返回值：zs
+2024-08-22 19:57:36 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:00:34 -- contextRefreshedEventListener   before
+2024-08-22 20:00:34 -- contextRefreshedEventListener   after
+2024-08-22 20:00:35 -- customEventListener   before
+2024-08-22 20:00:35 -- customEventListener   after
+2024-08-22 20:00:35 -- contextClosedEventListener   before
+2024-08-22 20:00:35 -- contextClosedEventListener   after
+2024-08-22 20:00:36 -- myAopTest   before
+2024-08-22 20:00:36 -- myAopTest   after
+2024-08-22 20:00:37 -- myAopTest1   before
+2024-08-22 20:00:37 -- myAopTest1   after
+2024-08-22 20:00:38 -- cat   before
+2024-08-22 20:00:38 -- cat -- 接口的初始化方法
+2024-08-22 20:00:38 -- cat   after
+2024-08-22 20:00:38 -- person   before
+2024-08-22 20:00:38 -- person   after
+2024-08-22 20:00:38 -- myConfiguration   before
+2024-08-22 20:00:38 -- myConfiguration   after
+2024-08-22 20:00:38 -- beanTest   before
+2024-08-22 20:00:38 -- beanTest   after
+2024-08-22 20:01:08 -- b   before
+2024-08-22 20:01:08 -- b   after
+2024-08-22 20:01:08 -- myBean   before
+2024-08-22 20:01:08 -- myBean   after
+2024-08-22 20:01:08 -- getObject 被调用
+2024-08-22 20:01:08 -- create myBean
+2024-08-22 20:01:08 -- userService   before
+2024-08-22 20:01:08 -- userService   after
+2024-08-22 20:01:08 -- a   before
+2024-08-22 20:01:08 -- a   after
+2024-08-22 20:01:08 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@35d019a3]
+2024-08-22 20:01:08 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@35d019a3 . 消息 -- 剑来
+2024-08-22 20:32:27 -- contextRefreshedEventListener   before
+2024-08-22 20:32:27 -- contextRefreshedEventListener   after
+2024-08-22 20:32:27 -- customEventListener   before
+2024-08-22 20:32:27 -- customEventListener   after
+2024-08-22 20:32:27 -- contextClosedEventListener   before
+2024-08-22 20:32:27 -- contextClosedEventListener   after
+2024-08-22 20:32:27 -- myAopTest1   before
+2024-08-22 20:32:27 -- myAopTest1   after
+2024-08-22 20:32:27 -- myAopTest   before
+2024-08-22 20:32:27 -- myAopTest   after
+2024-08-22 20:32:27 -- cat   before
+2024-08-22 20:32:27 -- cat -- 接口的初始化方法
+2024-08-22 20:32:27 -- cat   after
+2024-08-22 20:32:27 -- person   before
+2024-08-22 20:32:27 -- person   after
+2024-08-22 20:32:27 -- myConfiguration   before
+2024-08-22 20:32:27 -- myConfiguration   after
+2024-08-22 20:32:27 -- beanTest   before
+2024-08-22 20:32:27 -- beanTest   after
+2024-08-22 20:32:27 -- myBean   before
+2024-08-22 20:32:27 -- myBean   after
+2024-08-22 20:32:27 -- getObject 被调用
+2024-08-22 20:32:27 -- create myBean
+2024-08-22 20:32:27 -- a   before
+2024-08-22 20:32:27 -- a   after
+2024-08-22 20:32:27 -- b   before
+2024-08-22 20:32:27 -- b   after
+2024-08-22 20:32:27 -- userService   before
+2024-08-22 20:32:27 -- userService   after
+2024-08-22 20:32:27 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6b09bb57]
+2024-08-22 20:32:27 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6b09bb57 . 消息 -- 剑来
+2024-08-22 20:32:27 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:32:27 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:32:27 -- 返回通知，返回值：zs
+2024-08-22 20:32:27 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:32:36 -- contextRefreshedEventListener   before
+2024-08-22 20:32:36 -- contextRefreshedEventListener   after
+2024-08-22 20:32:36 -- customEventListener   before
+2024-08-22 20:32:36 -- customEventListener   after
+2024-08-22 20:32:36 -- contextClosedEventListener   before
+2024-08-22 20:32:36 -- contextClosedEventListener   after
+2024-08-22 20:32:36 -- myAopTest1   before
+2024-08-22 20:32:36 -- myAopTest1   after
+2024-08-22 20:32:36 -- myAopTest   before
+2024-08-22 20:32:36 -- myAopTest   after
+2024-08-22 20:32:36 -- cat   before
+2024-08-22 20:32:36 -- cat -- 接口的初始化方法
+2024-08-22 20:32:36 -- cat   after
+2024-08-22 20:32:36 -- person   before
+2024-08-22 20:32:36 -- person   after
+2024-08-22 20:32:36 -- myConfiguration   before
+2024-08-22 20:32:36 -- myConfiguration   after
+2024-08-22 20:32:36 -- beanTest   before
+2024-08-22 20:32:36 -- beanTest   after
+2024-08-22 20:32:36 -- a   before
+2024-08-22 20:32:36 -- a   after
+2024-08-22 20:32:36 -- b   before
+2024-08-22 20:32:36 -- b   after
+2024-08-22 20:32:36 -- myBean   before
+2024-08-22 20:32:36 -- myBean   after
+2024-08-22 20:32:36 -- getObject 被调用
+2024-08-22 20:32:36 -- create myBean
+2024-08-22 20:32:36 -- userService   before
+2024-08-22 20:32:36 -- userService   after
+2024-08-22 20:32:36 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@8f4ea7c]
+2024-08-22 20:32:36 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@8f4ea7c . 消息 -- 剑来
+2024-08-22 20:32:36 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:32:36 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:32:36 -- 返回通知，返回值：zs
+2024-08-22 20:32:36 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:36:13 -- contextRefreshedEventListener   before
+2024-08-22 20:36:13 -- contextRefreshedEventListener   after
+2024-08-22 20:36:13 -- customEventListener   before
+2024-08-22 20:36:13 -- customEventListener   after
+2024-08-22 20:36:13 -- contextClosedEventListener   before
+2024-08-22 20:36:13 -- contextClosedEventListener   after
+2024-08-22 20:36:13 -- myAopTest   before
+2024-08-22 20:36:13 -- myAopTest   after
+2024-08-22 20:36:13 -- myAopTest1   before
+2024-08-22 20:36:13 -- myAopTest1   after
+2024-08-22 20:36:13 -- cat   before
+2024-08-22 20:36:13 -- cat -- 接口的初始化方法
+2024-08-22 20:36:13 -- cat   after
+2024-08-22 20:36:13 -- person   before
+2024-08-22 20:36:13 -- person   after
+2024-08-22 20:36:13 -- myConfiguration   before
+2024-08-22 20:36:13 -- myConfiguration   after
+2024-08-22 20:36:13 -- beanTest   before
+2024-08-22 20:36:13 -- beanTest   after
+2024-08-22 20:36:13 -- a   before
+2024-08-22 20:36:13 -- a   after
+2024-08-22 20:36:13 -- userService   before
+2024-08-22 20:36:13 -- userService   after
+2024-08-22 20:36:13 -- b   before
+2024-08-22 20:36:13 -- b   after
+2024-08-22 20:36:13 -- myBean   before
+2024-08-22 20:36:13 -- myBean   after
+2024-08-22 20:36:13 -- getObject 被调用
+2024-08-22 20:36:13 -- create myBean
+2024-08-22 20:36:13 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@5c33f1a9]
+2024-08-22 20:37:06 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@5c33f1a9 . 消息 -- 剑来
+2024-08-22 20:37:06 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:37:06 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:37:06 -- 返回通知，返回值：zs
+2024-08-22 20:37:06 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:37:11 -- contextRefreshedEventListener   before
+2024-08-22 20:37:11 -- contextRefreshedEventListener   after
+2024-08-22 20:37:11 -- customEventListener   before
+2024-08-22 20:37:11 -- customEventListener   after
+2024-08-22 20:37:11 -- contextClosedEventListener   before
+2024-08-22 20:37:11 -- contextClosedEventListener   after
+2024-08-22 20:37:11 -- myAopTest   before
+2024-08-22 20:37:11 -- myAopTest   after
+2024-08-22 20:37:11 -- myAopTest1   before
+2024-08-22 20:37:11 -- myAopTest1   after
+2024-08-22 20:37:11 -- cat   before
+2024-08-22 20:37:11 -- cat -- 接口的初始化方法
+2024-08-22 20:37:11 -- cat   after
+2024-08-22 20:37:11 -- person   before
+2024-08-22 20:37:11 -- person   after
+2024-08-22 20:37:11 -- myConfiguration   before
+2024-08-22 20:37:11 -- myConfiguration   after
+2024-08-22 20:37:11 -- beanTest   before
+2024-08-22 20:37:11 -- beanTest   after
+2024-08-22 20:37:11 -- a   before
+2024-08-22 20:37:11 -- a   after
+2024-08-22 20:37:11 -- userService   before
+2024-08-22 20:37:11 -- userService   after
+2024-08-22 20:37:11 -- b   before
+2024-08-22 20:37:11 -- b   after
+2024-08-22 20:37:11 -- myBean   before
+2024-08-22 20:37:11 -- myBean   after
+2024-08-22 20:37:11 -- getObject 被调用
+2024-08-22 20:37:11 -- create myBean
+2024-08-22 20:37:11 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@1623b78d]
+2024-08-22 20:37:54 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@1623b78d . 消息 -- 剑来
+2024-08-22 20:37:54 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:37:54 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:37:54 -- 返回通知，返回值：zs
+2024-08-22 20:37:54 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:37:58 -- contextRefreshedEventListener   before
+2024-08-22 20:37:58 -- contextRefreshedEventListener   after
+2024-08-22 20:37:58 -- customEventListener   before
+2024-08-22 20:37:58 -- customEventListener   after
+2024-08-22 20:37:58 -- contextClosedEventListener   before
+2024-08-22 20:37:58 -- contextClosedEventListener   after
+2024-08-22 20:37:58 -- myAopTest   before
+2024-08-22 20:37:58 -- myAopTest   after
+2024-08-22 20:37:59 -- myAopTest1   before
+2024-08-22 20:37:59 -- myAopTest1   after
+2024-08-22 20:37:59 -- cat   before
+2024-08-22 20:37:59 -- cat -- 接口的初始化方法
+2024-08-22 20:37:59 -- cat   after
+2024-08-22 20:37:59 -- person   before
+2024-08-22 20:37:59 -- person   after
+2024-08-22 20:37:59 -- myConfiguration   before
+2024-08-22 20:37:59 -- myConfiguration   after
+2024-08-22 20:37:59 -- beanTest   before
+2024-08-22 20:37:59 -- beanTest   after
+2024-08-22 20:37:59 -- a   before
+2024-08-22 20:37:59 -- a   after
+2024-08-22 20:37:59 -- userService   before
+2024-08-22 20:37:59 -- userService   after
+2024-08-22 20:37:59 -- b   before
+2024-08-22 20:37:59 -- b   after
+2024-08-22 20:37:59 -- myBean   before
+2024-08-22 20:37:59 -- myBean   after
+2024-08-22 20:37:59 -- getObject 被调用
+2024-08-22 20:37:59 -- create myBean
+2024-08-22 20:37:59 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@1623b78d]
+2024-08-22 20:39:47 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@1623b78d . 消息 -- 剑来
+2024-08-22 20:39:47 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:39:47 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:39:47 -- 返回通知，返回值：zs
+2024-08-22 20:39:47 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:42:46 -- contextRefreshedEventListener   before
+2024-08-22 20:42:46 -- contextRefreshedEventListener   after
+2024-08-22 20:42:46 -- customEventListener   before
+2024-08-22 20:42:46 -- customEventListener   after
+2024-08-22 20:42:46 -- contextClosedEventListener   before
+2024-08-22 20:42:46 -- contextClosedEventListener   after
+2024-08-22 20:42:46 -- myAopTest1   before
+2024-08-22 20:42:46 -- myAopTest1   after
+2024-08-22 20:42:46 -- myAopTest   before
+2024-08-22 20:42:46 -- myAopTest   after
+2024-08-22 20:42:46 -- cat   before
+2024-08-22 20:42:46 -- cat -- 接口的初始化方法
+2024-08-22 20:42:46 -- cat   after
+2024-08-22 20:42:46 -- person   before
+2024-08-22 20:42:46 -- person   after
+2024-08-22 20:42:46 -- myConfiguration   before
+2024-08-22 20:42:46 -- myConfiguration   after
+2024-08-22 20:42:46 -- beanTest   before
+2024-08-22 20:42:46 -- beanTest   after
+2024-08-22 20:42:46 -- myBean   before
+2024-08-22 20:42:46 -- myBean   after
+2024-08-22 20:42:46 -- getObject 被调用
+2024-08-22 20:42:46 -- create myBean
+2024-08-22 20:42:46 -- a   before
+2024-08-22 20:42:46 -- a   after
+2024-08-22 20:42:46 -- b   before
+2024-08-22 20:42:46 -- b   after
+2024-08-22 20:42:46 -- userService   before
+2024-08-22 20:42:46 -- userService   after
+2024-08-22 20:42:46 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911]
+2024-08-22 20:42:46 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911 . 消息 -- 剑来
+2024-08-22 20:42:46 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:42:46 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:42:46 -- 返回通知，返回值：zs
+2024-08-22 20:42:46 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:43:40 -- contextRefreshedEventListener   before
+2024-08-22 20:43:40 -- contextRefreshedEventListener   after
+2024-08-22 20:43:40 -- customEventListener   before
+2024-08-22 20:43:40 -- customEventListener   after
+2024-08-22 20:43:40 -- contextClosedEventListener   before
+2024-08-22 20:43:40 -- contextClosedEventListener   after
+2024-08-22 20:43:40 -- myAopTest   before
+2024-08-22 20:43:40 -- myAopTest   after
+2024-08-22 20:43:40 -- myAopTest1   before
+2024-08-22 20:43:40 -- myAopTest1   after
+2024-08-22 20:43:40 -- cat   before
+2024-08-22 20:43:40 -- cat -- 接口的初始化方法
+2024-08-22 20:43:40 -- cat   after
+2024-08-22 20:43:40 -- person   before
+2024-08-22 20:43:40 -- person   after
+2024-08-22 20:43:40 -- myConfiguration   before
+2024-08-22 20:43:40 -- myConfiguration   after
+2024-08-22 20:43:40 -- beanTest   before
+2024-08-22 20:43:40 -- beanTest   after
+2024-08-22 20:43:40 -- a   before
+2024-08-22 20:43:40 -- a   after
+2024-08-22 20:43:40 -- userService   before
+2024-08-22 20:43:40 -- userService   after
+2024-08-22 20:43:40 -- b   before
+2024-08-22 20:43:40 -- b   after
+2024-08-22 20:43:40 -- myBean   before
+2024-08-22 20:43:40 -- myBean   after
+2024-08-22 20:43:40 -- getObject 被调用
+2024-08-22 20:43:40 -- create myBean
+2024-08-22 20:43:40 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@1623b78d]
+2024-08-22 20:43:40 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@1623b78d . 消息 -- 剑来
+2024-08-22 20:43:40 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:43:40 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:43:40 -- 返回通知，返回值：zs
+2024-08-22 20:43:40 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:43:40 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@1623b78d]
+2024-08-22 20:43:40 -- cat -- 接口的销毁方法
+2024-08-22 20:43:54 -- contextRefreshedEventListener   before
+2024-08-22 20:43:54 -- contextRefreshedEventListener   after
+2024-08-22 20:43:54 -- customEventListener   before
+2024-08-22 20:43:54 -- customEventListener   after
+2024-08-22 20:43:54 -- contextClosedEventListener   before
+2024-08-22 20:43:54 -- contextClosedEventListener   after
+2024-08-22 20:43:54 -- myAopTest1   before
+2024-08-22 20:43:54 -- myAopTest1   after
+2024-08-22 20:43:54 -- myAopTest   before
+2024-08-22 20:43:54 -- myAopTest   after
+2024-08-22 20:43:54 -- cat   before
+2024-08-22 20:43:54 -- cat -- 接口的初始化方法
+2024-08-22 20:43:54 -- cat   after
+2024-08-22 20:43:54 -- person   before
+2024-08-22 20:43:54 -- person   after
+2024-08-22 20:43:54 -- myConfiguration   before
+2024-08-22 20:43:54 -- myConfiguration   after
+2024-08-22 20:43:54 -- beanTest   before
+2024-08-22 20:43:54 -- beanTest   after
+2024-08-22 20:43:54 -- myBean   before
+2024-08-22 20:43:54 -- myBean   after
+2024-08-22 20:43:54 -- getObject 被调用
+2024-08-22 20:43:54 -- create myBean
+2024-08-22 20:43:54 -- a   before
+2024-08-22 20:43:54 -- a   after
+2024-08-22 20:43:54 -- b   before
+2024-08-22 20:43:54 -- b   after
+2024-08-22 20:43:54 -- userService   before
+2024-08-22 20:43:54 -- userService   after
+2024-08-22 20:43:54 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911]
+2024-08-22 20:43:54 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911 . 消息 -- 剑来
+2024-08-22 20:43:54 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:43:54 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:43:54 -- 返回通知，返回值：zs
+2024-08-22 20:43:54 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:43:54 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911]
+2024-08-22 20:43:54 -- cat -- 接口的销毁方法
+2024-08-22 20:44:22 -- contextRefreshedEventListener   before
+2024-08-22 20:44:22 -- contextRefreshedEventListener   after
+2024-08-22 20:44:22 -- customEventListener   before
+2024-08-22 20:44:22 -- customEventListener   after
+2024-08-22 20:44:22 -- contextClosedEventListener   before
+2024-08-22 20:44:22 -- contextClosedEventListener   after
+2024-08-22 20:44:22 -- myAopTest1   before
+2024-08-22 20:44:22 -- myAopTest1   after
+2024-08-22 20:44:22 -- myAopTest   before
+2024-08-22 20:44:22 -- myAopTest   after
+2024-08-22 20:44:22 -- cat   before
+2024-08-22 20:44:22 -- cat -- 接口的初始化方法
+2024-08-22 20:44:22 -- cat   after
+2024-08-22 20:44:22 -- person   before
+2024-08-22 20:44:22 -- person   after
+2024-08-22 20:44:22 -- myConfiguration   before
+2024-08-22 20:44:22 -- myConfiguration   after
+2024-08-22 20:44:22 -- beanTest   before
+2024-08-22 20:44:22 -- beanTest   after
+2024-08-22 20:44:22 -- myBean   before
+2024-08-22 20:44:22 -- myBean   after
+2024-08-22 20:44:22 -- getObject 被调用
+2024-08-22 20:44:22 -- create myBean
+2024-08-22 20:44:22 -- a   before
+2024-08-22 20:44:22 -- a   after
+2024-08-22 20:44:22 -- b   before
+2024-08-22 20:44:22 -- b   after
+2024-08-22 20:44:22 -- userService   before
+2024-08-22 20:44:22 -- userService   after
+2024-08-22 20:44:22 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911]
+2024-08-22 20:44:22 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911 . 消息 -- 剑来
+2024-08-22 20:44:22 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:44:22 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:44:22 -- 返回通知，返回值：zs
+2024-08-22 20:44:22 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:44:22 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911]
+2024-08-22 20:44:22 -- cat -- 接口的销毁方法
+2024-08-22 20:46:20 -- contextRefreshedEventListener   before
+2024-08-22 20:46:20 -- contextRefreshedEventListener   after
+2024-08-22 20:46:20 -- customEventListener   before
+2024-08-22 20:46:20 -- customEventListener   after
+2024-08-22 20:46:20 -- contextClosedEventListener   before
+2024-08-22 20:46:20 -- contextClosedEventListener   after
+2024-08-22 20:46:20 -- myAopTest1   before
+2024-08-22 20:46:20 -- myAopTest1   after
+2024-08-22 20:46:20 -- myAopTest   before
+2024-08-22 20:46:20 -- myAopTest   after
+2024-08-22 20:46:20 -- cat   before
+2024-08-22 20:46:20 -- cat -- 接口的初始化方法
+2024-08-22 20:46:20 -- cat   after
+2024-08-22 20:46:20 -- person   before
+2024-08-22 20:46:20 -- person   after
+2024-08-22 20:46:20 -- myConfiguration   before
+2024-08-22 20:46:20 -- myConfiguration   after
+2024-08-22 20:46:20 -- beanTest   before
+2024-08-22 20:46:20 -- beanTest   after
+2024-08-22 20:46:20 -- myBean   before
+2024-08-22 20:46:20 -- myBean   after
+2024-08-22 20:46:20 -- getObject 被调用
+2024-08-22 20:46:20 -- create myBean
+2024-08-22 20:46:20 -- a   before
+2024-08-22 20:46:20 -- a   after
+2024-08-22 20:46:20 -- b   before
+2024-08-22 20:46:20 -- b   after
+2024-08-22 20:46:20 -- userService   before
+2024-08-22 20:46:20 -- userService   after
+2024-08-22 20:46:20 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911]
+2024-08-22 20:46:20 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911 . 消息 -- 剑来
+2024-08-22 20:46:20 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:46:20 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:46:20 -- 返回通知，返回值：zs
+2024-08-22 20:46:20 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:46:20 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@6536e911]
+2024-08-22 20:46:20 -- cat -- 接口的销毁方法
+2024-08-22 20:48:19 -- contextRefreshedEventListener   before
+2024-08-22 20:48:19 -- contextRefreshedEventListener   after
+2024-08-22 20:48:19 -- customEventListener   before
+2024-08-22 20:48:19 -- customEventListener   after
+2024-08-22 20:48:19 -- contextClosedEventListener   before
+2024-08-22 20:48:19 -- contextClosedEventListener   after
+2024-08-22 20:48:19 -- myAopTest1   before
+2024-08-22 20:48:19 -- myAopTest1   after
+2024-08-22 20:48:19 -- myAopTest   before
+2024-08-22 20:48:19 -- myAopTest   after
+2024-08-22 20:48:20 -- cat   before
+2024-08-22 20:48:20 -- cat -- 接口的初始化方法
+2024-08-22 20:48:20 -- cat   after
+2024-08-22 20:48:20 -- person   before
+2024-08-22 20:48:20 -- person   after
+2024-08-22 20:48:20 -- myConfiguration   before
+2024-08-22 20:48:20 -- myConfiguration   after
+2024-08-22 20:48:20 -- beanTest   before
+2024-08-22 20:48:20 -- beanTest   after
+2024-08-22 20:48:20 -- factoryBeanTest   before
+2024-08-22 20:48:20 -- factoryBeanTest   after
+2024-08-22 20:48:20 -- getObject 被调用
+2024-08-22 20:48:20 -- userService   before
+2024-08-22 20:48:20 -- userService   after
+2024-08-22 20:48:20 -- create myBean
+2024-08-22 20:48:20 -- myBean get beanFactory：com.fzdkx.spring.beans.factory.support.DefaultListableBeanFactory@6b09bb57
+2024-08-22 20:48:20 -- myBean get classLoader：sun.misc.Launcher$AppClassLoader@18b4aac2
+2024-08-22 20:48:20 -- myBean get beanName：myBean
+2024-08-22 20:48:20 -- myBean   before
+2024-08-22 20:48:20 -- myBean 系统 init
+2024-08-22 20:48:20 -- myBean   after
+2024-08-22 20:48:20 -- a   before
+2024-08-22 20:48:20 -- a   after
+2024-08-22 20:48:20 -- b   before
+2024-08-22 20:48:20 -- b   after
+2024-08-22 20:48:20 -- 订阅到了 --- 容器刷新，事件源 com.fzdkx.spring.context.event.ContextRefreshedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@185d8b6]
+2024-08-22 20:48:20 -- 接受到自定义事件：id -- 20021116 , 事件源 -- com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@185d8b6 . 消息 -- 剑来
+2024-08-22 20:48:20 -- 前置通知，执行方法：queryUserInfo，方法参数：null
+2024-08-22 20:48:20 -- 目标方法调用：正在查询用户信息......
+2024-08-22 20:48:20 -- 返回通知，返回值：zs
+2024-08-22 20:48:20 -- 最终通知：~~~~~~~~~~~~
+2024-08-22 20:48:20 -- 订阅到了 --- 容器关闭，事件源 com.fzdkx.spring.context.event.ContextClosedEvent[source=com.fzdkx.spring.context.support.AnnotationConfigApplicationContext@185d8b6]
+2024-08-22 20:48:20 -- cat -- 接口的销毁方法
+2024-08-22 20:48:20 -- myBean 系统 destroy

@@ -1,7 +1,6 @@
 package com.fzdkx.spring.aop.framework;
 
 import com.fzdkx.spring.aop.AdvisedSupport;
-import org.aopalliance.intercept.MethodInterceptor;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
