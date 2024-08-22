@@ -1,6 +1,5 @@
 package com.fzdkx.mytest.factyory_bean;
 
-import com.fzdkx.mytest.live.MyBean;
 import com.fzdkx.spring.beans.factory.FactoryBean;
 import com.fzdkx.spring.context.annotation.Component;
 import lombok.extern.slf4j.Slf4j;

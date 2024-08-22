@@ -1,4 +1,4 @@
-package com.fzdkx.mytest.live;
+package com.fzdkx.mytest.life;
 
 import com.fzdkx.spring.beans.exception.BeansException;
 import com.fzdkx.spring.beans.factory.*;
