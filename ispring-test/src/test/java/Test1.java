@@ -1,8 +1,8 @@
 import com.fzdkx.mytest.MyConfiguration;
 import com.fzdkx.mytest.event.CustomEvent;
 import com.fzdkx.mytest.service.UserService;
-import com.fzdkx.mytest.xhyl.A;
-import com.fzdkx.mytest.xhyl.B;
+import com.fzdkx.mytest.loop.A;
+import com.fzdkx.mytest.loop.B;
 import com.fzdkx.spring.context.support.AnnotationConfigApplicationContext;
 import org.junit.Test;
 

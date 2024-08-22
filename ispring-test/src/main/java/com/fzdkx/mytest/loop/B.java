@@ -1,4 +1,4 @@
-package com.fzdkx.mytest.xhyl;
+package com.fzdkx.mytest.loop;
 
 import com.fzdkx.spring.context.annotation.Autowired;
 import com.fzdkx.spring.context.annotation.Component;

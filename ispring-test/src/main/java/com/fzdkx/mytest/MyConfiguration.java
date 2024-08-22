@@ -1,6 +1,6 @@
 package com.fzdkx.mytest;
 
-import com.fzdkx.mytest.xhyl.Person;
+import com.fzdkx.mytest.loop.Person;
 import com.fzdkx.spring.context.annotation.Bean;
 import com.fzdkx.spring.context.annotation.ComponentScan;
 import com.fzdkx.spring.context.annotation.Configuration;

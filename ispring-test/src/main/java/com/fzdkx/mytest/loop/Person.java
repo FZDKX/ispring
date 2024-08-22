@@ -1,8 +1,7 @@
-package com.fzdkx.mytest.xhyl;
+package com.fzdkx.mytest.loop;
 
 import com.fzdkx.spring.context.annotation.Autowired;
 import com.fzdkx.spring.context.annotation.Component;
-import com.fzdkx.spring.context.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 
 /**

@@ -1,6 +1,6 @@
 package com.fzdkx.mytest;
 
-import com.fzdkx.mytest.xhyl.Person;
+import com.fzdkx.mytest.loop.Person;
 
 /**
  * @author 发着呆看星
